@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 *{margin:0; padding: 0;}
 .clearfix{overflow: auto }
 a{
@@ -13,37 +16,65 @@ a{
 	background: linear-gradient(#33ccff,#b3ecff);
 }
 .top_bar_links{
-	float:left;
-	clear: left;
-	margin-top: 20px;
-	margin-left: 5px;
+    float: left;
+    width: 1000px;
+    background-color:#b3b3b3;
+
+
 }
-.top_bar_links ul{
-	list-style: none;
+
+.top_bar_links nav ul{
+    float:left;
+
 }
-.top_bar_links ul li{
-	display:inline;
-	border-right: 1px solid #00131a;
+.top_bar_links nav ul li{
+    background-color: #b3b3b3;
+    list-style: none;
+    float:left;
+    position: relative;
+    display: block;
 }
-.top_bar_links ul li:last-child{
-	border-right: 0;
+.top_bar_links nav ul li:nth-child(2) img{
+    width: 20px;
+    height: 15px;
+    border: blue;
 }
-.top_bar_links ul li a{
-	font-family: arial;
-	color: #00131a;
-	padding:0px 10px;
+.top_bar_links nav ul li a{
+    color: black;
+    display: block;
+    font-family: "Open Sans";
+    font-size: 18px;
+    padding: 15px 15px;
 }
+.top_bar_links nav ul li a:hover{
+    background-color:  #e6e6e6;
+}
+.top_bar_links nav ul li ul{
+    position: absolute;
+    display: none;
+}
+.top_bar_links nav ul li:hover ul{
+    display: block;
+}
+.top_bar_links nav ul li ul li{
+    width: 250px;
+}
+.top_bar_links nav ul li ul li a{
+    padding: 8px 20px;
+}
+
+
 .site_search{
 	float:right ;
 	margin: 15px;
-	margin-top: 20px;
+	margin-top: 100px;
 	background: white;
 	border-radius: 12.5px
 
 }
 .site_search input{
 	border:none;
-	width: 200px;
+	width: 150px;
 	height:25px;
 	font-size: 15px;
 	margin-left: 15px;
@@ -68,21 +99,103 @@ a{
 }
 
 .header h1{
-	font-family:arial;
+	font-family:sans-serif;
 	font-weight: normal;
 	font-size: 48px;
 	text-align: center;
 	margin-top: 15px;
 }
 .header p{
-	font-family:arial;
+	font-family:"Ubuntu";
 	font-weight: normal;
-	font-size: 20px;
+	font-size: 30px;
 	text-align: center;
 }
 .image{
 	float: left;
 	margin-left: 70px;
+
+}
+.welcome_bar{
+	width: 1000px;
+	background-color: #e6e6e6;
+}
+.welcome_message{
+	margin: 20px;
+}
+.welcome_message h2{
+	margin:5px;
+	text-align: center;
+	font-family: 'Open Sans', serif;
+	font-weight:  100;
+	font-size: 30px;
+}
+.welcome_message p{
+	text-align: center;
+	font-family: "Open Sans";
+	font-size: 18px;
+	font-weight: lighter;
 }
 
-
+.select{
+	width: 1000px;
+	background-color: lightgrey;
+}
+.select ul{
+	list-style: none;
+}
+.middle_bar{
+    font-family: "Open Sans";
+    height: 300px;
+    background-color:#e6e6e6 ;
+}
+.exam_calander{
+    text-align: center;
+    width: 500px;
+    float: left;
+}
+.exam_calander h2{
+    font-weight: lighter;
+}
+.news{
+    text-align: center;
+    width: 500px;
+    float: left;
+}
+.news h2{
+    font-weight: lighter;
+}
+.follow{
+    height: 100px;
+    background-color: #b3b3b3;
+}
+.follow p{
+    font-family: "Open Sans";
+    font-weight: lighter;
+    margin-top:25px;
+    margin-right: 20px;
+    font-size: 20px;
+    float: right;
+}
+.icon{
+    margin: 5px;
+}
+.icon img {
+    float: right;
+    margin-top: 20px;
+    margin-right: 10px;
+    width: 35px;
+}
+.signin {
+	background-color:#e6e6e6; 
+	height: 300px;
+}
+.signin form{
+	margin: 0 auto;
+	vertical-align: center;
+	
+}
+.signin form ul li {
+	font-family: arial;
+	list-style: none;
+}
