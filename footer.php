@@ -13,6 +13,7 @@
 		        <a href="http://www.youtube.com/user/uomwebteam/videos"><img src="icon/youtube.png" alt=""></a>
 		    </div>
 		    <p>FOLLOW US ON SOCIAL MEDIA</p>
+		    <p>© 2018. CodeFun</p>
 		</div>
 	</body>
 </html>
