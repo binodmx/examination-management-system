@@ -11,8 +11,14 @@
 
         <div class="middle_bar">
             <!select semester>
-            <?php $semester=$_GET['sem'];?>
-            <form action="results.php" method="GET">
+            <?php 
+                if(isset($_REQUEST['sem'])){
+                    $semester=$_REQUEST['sem'];
+                }else{
+                    $semester="";
+                }
+            ;?>
+            <form action="viewresults.php" method="GET">
                 Semester :
                 <select name="sem">
                     <option value="1" <?php if($semester=="1"){echo "selected";};?>>1</option>
@@ -24,7 +30,7 @@
                     <option value="7" <?php if($semester=="7"){echo "selected";};?>>7</option>
                     <option value="8" <?php if($semester=="8"){echo "selected";};?>>8</option>
                 </select> 
-                <input type="text" name="studentid" value=<?php echo $_GET['studentid'];?> hidden>
+                <input type="text" name="studentid" value=<?php echo $_REQUEST['studentid'];?> hidden>
                 <input type="submit" value="submit">
             </form>
             
@@ -44,19 +50,19 @@
                 } 
 
                 // Identify student
-                $studentid = $_GET['studentid'];
-                $studentsql = "SELECT semester, department FROM students WHERE id='".$studentid."'";
+                $studentid = $_REQUEST['studentid'];
+                $studentsql = "SELECT semester, department FROM students WHERE id='$studentid'";
                 $studentquery = $conn->query($studentsql);
                 $studentqueryrow = $studentquery->fetch_assoc();
                 $department = $studentqueryrow["department"];
                 
-                $resultsql = "SELECT * FROM stu_".$_GET['studentid']."_results WHERE semester='".$semester."'";
+                $resultsql = "SELECT * FROM stu_".$studentid."_results WHERE semester='$semester'";
                 $resultquery = $conn->query($resultsql);
 
                 //Display results in table
                 if($resultquery->num_rows>0){
-                    echo "<table align='center'>
-                            <caption id='cpt1'>Results of semester ".$semester." - Department of ".$department."</caption>
+                    echo "<table>
+                            <caption id='cpt1'>Results of semester $semester </caption>
                             <div>
                             <tr>
                                 <th>Module ID</th>
@@ -66,7 +72,7 @@
                     
                         while($resultrow=$resultquery->fetch_assoc()){
                             $moduleid=$resultrow["id"];
-                            $modulesql = "SELECT name FROM modules WHERE id='".$moduleid."'";
+                            $modulesql = "SELECT name FROM modules WHERE id='$moduleid'";
                             $modulequery = $conn->query($modulesql);
                             $modulerow = $modulequery->fetch_assoc();
                             $modulename = $modulerow["name"];
@@ -80,6 +86,7 @@
                 }else{
                     if($semester!=""){echo "Not available";};
                 }
+                echo "</table>";
                 $conn->close();
             ?>
         </div>

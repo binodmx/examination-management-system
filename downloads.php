@@ -33,6 +33,31 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
             </select><br>
+            <?php 
+                // Database details
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "ems";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                } 
+
+                // Get module ids
+                $modulessql = "SELECT id, name FROM modules WHERE semester='".$sem."'";
+                $studentquery = $conn->query($studentsql);
+                $studentqueryrow = $studentquery->fetch_assoc();
+                $department = $studentqueryrow["department"];
+            ?>
+            Module :
+            <select name="id">
+
+            </select>
         </form>
         </div>
     
