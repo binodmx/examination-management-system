@@ -4,9 +4,6 @@
         <title>
             Contact Us
         </title>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-    </head>
-    <body>
         <style>
             .grid-container {
               display: grid;
@@ -22,6 +19,9 @@
               text-align: center;
             }
         </style>
+    </head>
+    <body>
+        
         <?php include_once "header.php";?>
 
         

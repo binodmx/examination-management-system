@@ -11,6 +11,7 @@
         <div class="middle_bar">
             <form>
                 <?php
+                    session_start();
                     // Database details
                     $servername = "localhost";
                     $username = "root";
@@ -26,7 +27,7 @@
                     } 
 
                     // Identify student
-                    $studentid = $_GET['studentid'];
+                    $studentid = $_SESSION['studentid'];
                     $studentsql = "SELECT semester, department FROM students WHERE id='".$studentid."'";
                     $studentquery = $conn->query($studentsql);
                     $studentqueryrow = $studentquery->fetch_assoc();

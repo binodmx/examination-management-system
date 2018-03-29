@@ -12,6 +12,7 @@
         <div class="middle_bar">
             <!select semester>
             <?php 
+                session_start();
                 if(isset($_REQUEST['sem'])){
                     $semester=$_REQUEST['sem'];
                 }else{
@@ -30,7 +31,7 @@
                     <option value="7" <?php if($semester=="7"){echo "selected";};?>>7</option>
                     <option value="8" <?php if($semester=="8"){echo "selected";};?>>8</option>
                 </select> 
-                <input type="text" name="studentid" value=<?php echo $_REQUEST['studentid'];?> hidden>
+                <input type="text" name="studentid" value=<?php echo $_SESSION['studentid'];?> hidden>
                 <input type="submit" value="submit">
             </form>
             
@@ -50,7 +51,7 @@
                 } 
 
                 // Identify student
-                $studentid = $_REQUEST['studentid'];
+                $studentid = $_SESSION['studentid'];
                 $studentsql = "SELECT semester, department FROM students WHERE id='$studentid'";
                 $studentquery = $conn->query($studentsql);
                 $studentqueryrow = $studentquery->fetch_assoc();

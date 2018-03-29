@@ -10,6 +10,7 @@
         <?php include_once "header.php"; ?>
         <div class="middle_bar">
             <?php
+                session_start();
                 // Database details
                 $servername = "localhost";
                 $username = "root";
@@ -25,7 +26,7 @@
                 } 
 
                 // Identify student
-                $studentid = $_REQUEST['studentid'];
+                $studentid = $_SESSION['studentid'];
                 $studentsql = "SELECT name FROM students WHERE id='$studentid'";
                 $studentquery = $conn->query($studentsql);
                 $studentqueryrow = $studentquery->fetch_assoc();

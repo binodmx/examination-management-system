@@ -49,7 +49,7 @@
                 } 
 
                 // Get module ids
-                $modulessql = "SELECT id, name FROM modules WHERE semester='".$sem."'";
+                $modulessql = "SELECT id, name FROM modules WHERE department=semester='".$sem."'";
                 $studentquery = $conn->query($studentsql);
                 $studentqueryrow = $studentquery->fetch_assoc();
                 $department = $studentqueryrow["department"];

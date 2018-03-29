@@ -8,8 +8,6 @@
     </head>
     <body>
         <?php include_once "header.php";?>
-
-        
         <div class="signin_div">
 
             <!signin form>
@@ -20,49 +18,48 @@
                 <button type="submit" name="submit"> Sign In</button><br>
             </form>
         
-        <?php
-            session_start();
-            if(isset($_POST['usn']) && isset($_POST['pwd'])){
+            <?php
+                session_start();
+                if(isset($_POST['usn']) && isset($_POST['pwd'])){
 
-                // Validate step 1
-                if(strlen($_POST['usn'])<7 || strlen($_POST['pwd'])==0){
-                    echo "Invalid username or password.";
-                }else{
-
-                    // Database details
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "ems";
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    } 
-
-                    // Get data
-                    $studentsql = "SELECT password FROM students WHERE id='".$_POST['usn']."'";
-                    $studentquery = $conn->query($studentsql);
-
-                    // Validate step 2
-                    if($studentqueryrow = $studentquery->fetch_assoc()){
-                        $studentpassword = $studentqueryrow["password"];
-                        if($_POST['pwd']==$studentpassword){
-                            $_SESSION['studentid']=$_POST['usn'];
-                            header("Location:index.php");
-                        }else{
-                            echo "Invalid password";
-                        }
+                    // Validate step 1
+                    if(strlen($_POST['usn'])<7 || strlen($_POST['pwd'])==0){
+                        echo "Invalid username or password.";
                     }else{
-                        echo "Invalid username.";
+
+                        // Database details
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "ems";
+
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        } 
+
+                        // Get data
+                        $studentsql = "SELECT password FROM students WHERE id='".$_POST['usn']."'";
+                        $studentquery = $conn->query($studentsql);
+
+                        // Validate step 2
+                        if($studentqueryrow = $studentquery->fetch_assoc()){
+                            $studentpassword = $studentqueryrow["password"];
+                            if($_POST['pwd']==$studentpassword){
+                                $_SESSION['studentid']=$_POST['usn'];
+                                header("Location:index.php");
+                            }else{
+                                echo "Invalid password";
+                            }
+                        }else{
+                            echo "Invalid username.";
+                        }
                     }
                 }
-            }
-        ?>
-
+            ?>
         </div>
         <?php include_once "footer.php";?>
     </body>
