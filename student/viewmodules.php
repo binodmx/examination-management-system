@@ -9,21 +9,9 @@
     <body>
         <?php include_once "header.php"; ?>
         <div class="middle_bar">
+            <?php include_once "dbconnect.php"?>
             <?php
                 session_start();
-                // Database details
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "ems";
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } 
 
                 // Identify student
                 $studentid = $_SESSION['studentid'];

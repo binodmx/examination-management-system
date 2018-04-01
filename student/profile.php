@@ -24,7 +24,7 @@
                             <p><a href="registermodules.php">Register for modules</a></p>
                             <p><a href="viewmodules.php">View registered modules</a></p>
                             <p><a href="viewresults.php">View results</a></p>
-                            <p><a href="#">Inform absense details</a></p>
+                            <p><a href="informabsensedetails.php">Inform absense details</a></p>
                             <p><a href="#">Apply for recorrection</a></p>
                             <p><a href="#">Apply for repeat exams</a></p>
                             <p><a href="#">Apply for convocation</a></p>
