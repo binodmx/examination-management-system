@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
     </head>
     <body>
         <div class="wrapper">
             <div class="top_bar clearfix">
                 <div class="image clearfix">
-                    <img src="image/mora.png" width="113.333px" height="137px">
+                    <img src="../image/mora.png" width="113.333px" height="137px">
                 </div>
                 <div class="header">
                     <h1>Examination Management System</h1>
@@ -18,13 +18,13 @@
             <div class="top_bar_links">
                 <nav>
                     <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="downloads.php">Downloads</a></li>
-                        <li><a href="student/studentprofile.php">Student Profile</a></li>
-                        <li><a href="lecturer/lecprofile.php">Lecturer Profile</a></li>
-                        <li><a href="contactus.php">Contact Us</a></li>
-                        <li><a href="signin.php">Sign In</a></li>
-                        <li><a href="signup.php">Sign Up</a></li>
+                        <li><a href="../index.php">Home</a></li>
+                        <li><a href="../downloads.php">Downloads</a></li>
+                        <li><a href="../student/studentprofile.php">Student Profile</a></li>
+                        <li><a href="lecprofile.php">Lecturer Profile</a></li>
+                        <li><a href="../contactus.php">Contact Us</a></li>
+                        <li><a href="../signin.php">Sign In</a></li>
+                        <li><a href="../signup.php">Sign Up</a></li>
                         <li><a href="#">Information</a>
                             <ul>
                                 <li><a href="#">ACADEMIC TRANSCRIPT</a></li>
