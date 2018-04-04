@@ -20,7 +20,7 @@
                 }else{
                     echo
                         '<div class="middle_bar">
-                            <p><a href="#">Edit Profile</a></p>
+                            <p><a href="editprofile.php">Edit Profile</a></p>
                             <p><a href="registermodules.php">Register for modules</a></p>
                             <p><a href="viewmodules.php">View registered modules</a></p>
                             <p><a href="viewresults.php">View results</a></p>

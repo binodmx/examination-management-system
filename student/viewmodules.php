@@ -9,7 +9,7 @@
     <body>
         <?php include_once "header.php"; ?>
         <div class="middle_bar">
-            <?php include_once "dbconnect.php"?>
+            <?php include_once "../dbconnect.php"?>
             <?php
                 session_start();
 

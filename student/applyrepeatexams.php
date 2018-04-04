@@ -35,7 +35,7 @@
                 <input type="submit" value="submit">
             </form>
             
-            <?php include_once "../dbconnect.php"?>
+            <?php include_once "dbconnect.php"?>
 
             <?php
                 // Identify student
