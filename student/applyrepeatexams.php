@@ -7,9 +7,12 @@
         <link rel="stylesheet" type="text/css" href="../css/styles.css">
     </head>
     <body>
-        <?php include_once "header.php";?>
+        <?php 
+            include_once "header.php";
+            include_once "sidebar.php";
+        ?>
 
-        <div class="middle_bar">
+        <div class="middlediv">
             <!select semester>
             <?php 
                 session_start();

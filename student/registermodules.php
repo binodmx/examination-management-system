@@ -7,8 +7,11 @@
         </title>
     </head>
     <body>
-        <?php include_once "header.php"; ?>
-        <div class="middle_bar">
+        <?php 
+            include_once "header.php";
+            include_once "sidebar.php";
+        ?>
+        <div class="middlediv">
             <form>
                 <?php include_once "../dbconnect.php"?>
                 <?php
@@ -33,7 +36,7 @@
                     if(!$availability){
                         $sql = "SELECT id, name, credits, gpa, compulsory FROM modules WHERE semester=".$semester;
                         $result = $conn->query($sql);
-                        echo "<table align='center'>
+                        echo "<table>
                                 <caption id='cpt1'>Available Modules for Semester ".$semester." - Department of ".$department."</caption>
                                 <caption id='cpt2'>Selected Modules for Semester ".$semester." - Department of ".$department."</caption>
                                 <div>

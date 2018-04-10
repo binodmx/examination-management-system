@@ -7,8 +7,11 @@
         </title>
     </head>
     <body>
-        <?php include_once "header.php"; ?>
-        <div class="middle_bar">
+        <?php 
+            include_once "header.php";
+            include_once "sidebar.php";        
+        ?>
+        <div class="middlediv">
             <?php include_once "../dbconnect.php"?>
             <?php
                 session_start();
