@@ -2,7 +2,7 @@
     echo
         "<div class='sidenav'>
             <a href='profile.php'>My profile</a>
-            <a href='#'>Upload Past Papers</a>
+            <a href='uploadpastpapers.php'>Upload Past Papers</a>
             <a href='#'>Upload Exam Papers</a>
             <a href='#'>Upload Results</a>
             <a href='#'>Check Summary</a>

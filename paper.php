@@ -1,36 +1,35 @@
 <?php 
     class paper{
-        var $year;
-        var $semester;
-        var $moduleId;
-        var $department;
-        var $content;
+        private $year;
+        private $semester;
+        private $moduleId;
+        private $department;
+        private $link;
 
-        function __construct($yr, $sm, $md, $dp, $ct){
+        public function __construct( $md, $yr, $sm, $dp, $li){
             $this->year = $yr;
             $this->semester = $sm;
             $this->moduleId = $md;
             $this->department = $dp;
-            $this->content = $ct;
+            $this->link = $li;
         }
-        function __destruct(){
+        public function __destruct(){
             //destroy paper object
         }
-        function getYear(){
+        public function getYear(){
             return $this->year;
         }
-        function getSemester(){
+        public function getSemester(){
             return $this->semester;
         }
-        function getModuleId(){
+        public function getModuleId(){
             return $this->moduleId;
         }
-        function getDepartment(){
+        public function getDepartment(){
             return $this->department;
         }
-        function getContent(){
-            return $this->content;
+        public function getLink(){
+            return $this->link;
         }  
-
     }
 ?>

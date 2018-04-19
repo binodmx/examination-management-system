@@ -17,7 +17,7 @@
                 display: inline-block;
             }
             input, select, textarea {
-                width: 85%;
+                width: 90%;
                 padding: 12px;
                 border: 1px solid #ccc;
                 border-radius: 4px;
