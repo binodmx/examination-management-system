@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +15,6 @@
         <div class="middlediv">
             <!select semester>
             <?php 
-                session_start();
             ?>
         </div>
 

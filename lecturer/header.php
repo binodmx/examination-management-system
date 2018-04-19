@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,9 +21,7 @@
                     <ul>
                         <li><a href="../index.php">Home</a></li>
                         <li><a href="../downloads.php">Downloads</a></li>
-                        <li><a href="../student/profile.php">Student Profile</a></li>
-                        <li><a href="profile.php">Lecturer Profile</a></li>
-                        <li><a href="../admin/profile.php">Admin Profile</a></li>
+                        <li><a href='<?php echo "../".$_SESSION['profile']."/profile.php"?>'>Profile</a></li>
                         <li><a href="../contactus.php">Contact Us</a></li>
                         <li><a href="../signin.php">Sign In</a></li>
                         <li><a href="../signup.php">Sign Up</a></li>

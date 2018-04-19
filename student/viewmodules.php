@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +15,6 @@
         <div class="middlediv">
             <?php include_once "../dbconnect.php"?>
             <?php
-                session_start();
 
                 // Identify student
                 $studentid = $_SESSION['studentid'];

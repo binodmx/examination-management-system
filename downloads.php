@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +31,7 @@
         <div class="middle_bar">
         <form action="downloads.php" method="POST">
             <label>Department :</label>
-            <select name="department">
+            <select name="department" onchange="this.form.submit()">
                 <option value="bmd" <?php if(isset($_POST['department']) && $_POST['department']=='bmd'){echo "selected";}?>>Bio Medical Engineering</option>
                 <option value="cse" <?php if(isset($_POST['department']) && $_POST['department']=='cse'){echo "selected";}?>>Computer Science and Engineering</option>
                 <option value="civ" <?php if(isset($_POST['department']) && $_POST['department']=='civ'){echo "selected";}?>>Civil Engineering</option>
@@ -72,7 +73,7 @@
             include_once "dbconnect.php";
             
             if(isset($_POST['semester']) && isset($_POST['department']) && isset($_POST['module'])){
-                $papersql = "SELECT id, year, link FROM papers WHERE id='".$_POST['module']."' AND semester='".$_POST['semester']."'";
+                $papersql = "SELECT id, year, link FROM papers WHERE id='".$_POST['module']."' AND semester='".$_POST['semester']."' AND department='".$_POST['department']."'";
                 $paperquery = $conn->query($papersql);
                 if($paperquery->num_rows>0){
                     while($paperrow=$paperquery->fetch_assoc()){

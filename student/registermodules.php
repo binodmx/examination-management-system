@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $studentid = $_SESSION['studentid'];
     include_once "../dbconnect.php";
     // Update registered
