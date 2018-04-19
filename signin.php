@@ -87,7 +87,7 @@
                                         header("Location:student/profile.php");                              
                                         break;
                                     case 'lecturer':
-                                        $_SESSION['lecuturerid']=$_POST['usn'];
+                                        $_SESSION['lecturerid']=$_POST['usn'];
                                         $_SESSION['profile']='lecturer';
                                         header("Location:lecturer/profile.php"); 
                                         break;
