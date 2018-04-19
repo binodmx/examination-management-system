@@ -43,7 +43,7 @@
                                 $id=$row["id"];
                                 $resultsql="SELECT id FROM stu_".$studentid."_results WHERE id='$id'";
                                 $resultquery=$conn->query($resultsql);
-                                if($resultquery->num_rows>0){
+                                if(!$resultquery->num_rows>0){
                                     echo "<tr id='$id'>
                                             <td name='tdchkbox'><input type='checkbox' name='id[]' value='$id'></td>
                                             <td>".$row["id"]."</td>

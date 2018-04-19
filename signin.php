@@ -26,20 +26,7 @@
                     if(strlen($_POST['usn'])<7 || strlen($_POST['pwd'])==0){
                         echo "Invalid username or password.";
                     }else{
-
-                        // Database details
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "ems";
-
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        } 
+                        include_once "dbconnect.php";
 
                         // Get data
                         $studentsql = "SELECT password FROM students WHERE id='".$_POST['usn']."'";

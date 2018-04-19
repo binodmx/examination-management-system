@@ -4,6 +4,24 @@
         <title>
             Downloads
         </title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            label {
+                padding: 12px 12px 12px 0;
+                display: inline-block;
+            }
+            input, select, textarea {
+                width: 90%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: vertical;
+                float: right;
+                
+            }
+        </style>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
     <body>
@@ -11,7 +29,7 @@
 
         <div class="middle_bar">
         <form>
-            Department :
+            <label>Department :</label>
             <select name="dept">
                 <option value="bmd">Bio Medical Engineering</option>
                 <option value="cse" selected>Computer Science and Engineering</option>
@@ -21,8 +39,8 @@
                 <option value="ent">Electronic and Telecommunication Engineering</option>
                 <option value="mec">Mechanical Engineering</option>
                 <option value="mat">Material Sciences Engineering</option>
-            </select><br>
-            Semester :
+            </select><br><br>
+            <label>Semester :</label>
             <select name="sem">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -33,20 +51,8 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
             </select><br>
-            <?php 
-                // Database details
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "ems";
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } 
+            <?php
+                include_once "dbconnect.php";
 
                 // Get module ids
                 $modulessql = "SELECT id, name FROM modules WHERE department=semester='".$sem."'";
