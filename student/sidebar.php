@@ -2,7 +2,7 @@
     echo
         "<div class='sidenav'>
             <a href='profile.php'>My profile</a>
-            <a href='registermodules.php'>Register for modules</a>
+            <a href='moduleregistration.php'>Register for modules</a>
             <a href='viewmodules.php'>View registered modules</a>
             <a href='viewresults.php'>View results</a>
             <a href='informabsensedetails.php'>Inform absense details</a>

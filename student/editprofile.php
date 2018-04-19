@@ -5,6 +5,33 @@
         <title>
             Edit Profile
         </title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            label {
+                padding: 12px 12px 12px 0;
+                display: inline-block;
+            }
+            input, select, textarea {
+                width: 85%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: vertical;
+                float: right;
+            }
+            input[type=submit] {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                float: right;
+            }
+
+        </style>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
     <body>
@@ -34,13 +61,14 @@
                 echo 
                     "<div class='middlediv'>
                         <form action='editprofile.php' method='POST'>
-                            Index no: <input type='text' name='id' value='".$studentqueryrow['id']."' disabled><br>
-                            Full Name: <input type='text' name='name' value='".$studentqueryrow['name']."'><br>
-                            Email: <input type='email' name='email' value='".$studentqueryrow['email']."'><br>
-                            Mobile: <input type='number' name='mobile' value='".$studentqueryrow['mobile']."' maxlength='10'><br>
-                            Current Password: <input type='password' name='pwd1'><br>
-                            New password: <input type='password' name='pwd2'><br>
-                            Confirm password: <input type='password' name='pwd2'><br>
+                            <br><br><br><br>    
+                            <label>Index no: </label><input type='text' name='id' value='".$studentqueryrow['id']."' disabled><br>
+                            <label>Full Name: </label><input type='text' name='name' value='".$studentqueryrow['name']."'><br>
+                            <label>Email: </label><input type='email' name='email' value='".$studentqueryrow['email']."'><br>
+                            <label>Mobile: </label><input type='number' name='mobile' value='".$studentqueryrow['mobile']."' maxlength='10'><br>
+                            <label>Current Password: </label><input type='password' name='pwd1'><br>
+                            <label>New password: </label><input type='password' name='pwd2'><br>
+                            <label>Confirm password: </label><input type='password' name='pwd2'><br><br>
                             <input type='text' name='status' value='update' hidden>
                             <input type='submit' value='Update Profile'>
                         </form>
