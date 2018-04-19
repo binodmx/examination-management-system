@@ -4,20 +4,48 @@
         <title>
             Sign In
         </title>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+            form {border: 3px solid #f1f1f1;}
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+            }
+            button:hover {
+                opacity: 0.8;
+            }
+            .container {
+                padding: 16px;
+            }
+        </style>
     </head>
     <body>
         <?php include_once "header.php";?>
-        <div class="signin_div">
-
+        <br><br><br>
+        <div class="container">
             <!signin form>
-            <form action="signin.php" method="POST" class="signin_form">
-                Username :<input id="u" type="text"  name="usn" maxlength="7" autofocus value=
-                "<?php if(isset($_POST['usn'])){echo $_POST['usn'];}else{echo '';} ?>"><br>
-                Password :<input id="p" type="password"  name="pwd" maxlength="1023"><br>
+            <form action="signin.php" method="POST" >
+                <label>Username :</label>
+                <input id="u" type="text"  name="usn" maxlength="7" placeholder="Enter Username" autofocus value="<?php if(isset($_POST['usn'])){echo $_POST['usn'];}else{echo '';} ?>"><br>
+                <label>Password :</label>
+                <input id="p" type="password"  name="pwd" maxlength="1023" placeholder="Enter Password"><br>
                 <button type="submit" name="submit"> Sign In</button><br>
             </form>
-        
+        </div>
             <?php
                 session_start();
                 if(isset($_POST['usn']) && isset($_POST['pwd'])){
@@ -37,7 +65,7 @@
                             $studentpassword = $studentqueryrow["password"];
                             if($_POST['pwd']==$studentpassword){
                                 $_SESSION['studentid']=$_POST['usn'];
-                                header("Location:index.php");
+                                header("Location:student/profile.php");
                             }else{
                                 echo "Invalid password";
                             }
@@ -47,7 +75,7 @@
                     }
                 }
             ?>
-        </div>
+        
         <?php include_once "footer.php";?>
     </body>
 </html>

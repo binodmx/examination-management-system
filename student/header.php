@@ -7,7 +7,7 @@
         <div class="wrapper">
             <div class="top_bar clearfix">
                 <div class="image clearfix">
-                    <img src="../image/mora.png" width="113.333px" height="137px">
+                    <img src="../imgs/mora.png" width="113.333px" height="137px">
                 </div>
                 <div class="header">
                     <h1>Examination Management System</h1>
