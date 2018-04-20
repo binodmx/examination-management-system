@@ -7,25 +7,17 @@
         </title>
     </head>
     <body>
-        <?php include_once "header.php"; ?>
-        <div class="middle_bar">
+        <?php 
+            include_once "header.php";
+            include_once "sidebar.php";        
+        ?>
+        <div class="middlediv">
+            <?php include_once "../dbconnect.php"?>
             <?php
-                // Database details
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "ems";
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } 
+                session_start();
 
                 // Identify student
-                $studentid = $_REQUEST['studentid'];
+                $studentid = $_SESSION['studentid'];
                 $studentsql = "SELECT name FROM students WHERE id='$studentid'";
                 $studentquery = $conn->query($studentsql);
                 $studentqueryrow = $studentquery->fetch_assoc();

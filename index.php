@@ -4,41 +4,32 @@
         <title>
             EMS - UoM
         </title>
+        <style>
+			.mySlides {display: block; margin-left: auto; margin-right: auto; width: 40vw;height:20vw;}
+		</style>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
     <body>
         <?php include_once "header.php";?>
-        <?php
-            session_start();
-            if(isset($_POST['usn']) && isset($_POST['pwd'])){
-                // Database details
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "ems";
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } 
-
-                // Identify student
-                $studentsql = "SELECT password FROM students WHERE id='".$_POST['usn']."'";
-                $studentquery = $conn->query($studentsql);
-                if($studentqueryrow = $studentquery->fetch_assoc()){
-                    $studentpassword = $studentqueryrow["password"];
-                    if($_POST['pwd']==$studentpassword){
-                        $_SESSION['studentid']=$_POST['usn'];
-                    }
-                }else{
-                    echo "not valid";
-                }
-            }
-        ?>
+        
         <div class="middle_bar">
+            <img class="mySlides" src="imgs/home_img1.jpg" >
+            <img class="mySlides" src="imgs/home_img2.jpg" >
+            <img class="mySlides" src="imgs/home_img3.jpg" >
+            <img class="mySlides" src="imgs/home_img4.jpg" >
+            <script>
+                var slideIndex=0;
+                showSlides();
+                function showSlides() {
+                    if(slideIndex==3){slideIndex=0;}else{slideIndex++;}
+                    var slides = document.getElementsByClassName("mySlides");
+                    for(var i = 0; i < slides.length; i++){
+                        slides[i].style.display = "none"; 
+                    }
+                    slides[slideIndex].style.display = ""; 
+                    setTimeout(showSlides, 3000);
+                }
+            </script>
             <h2 align='center'>Welcome to Examination Management System of University of Moratuwa</h2>
             <p align='center'>
                 Examinations  Division provides various important student related services such as Student Registration, Undergraduate and Postgraduate Examinations Related Activities, Conducting Aptitude Tests, Issuing Examination Results, Issuing Academic Transcripts and Degree Certificates etc.
@@ -46,3 +37,5 @@
         </div>
     
         <?php include_once "footer.php";?>
+    </body>
+</html>

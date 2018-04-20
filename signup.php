@@ -6,38 +6,79 @@
         </title>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
+    <style>
+        .signup_container {
+            width: 100%;
+            padding: 50px;
+        }
+        .signupform{
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 50px;
+            width: 400px;
+        }
+        table{
+            margin: 0 auto;
+            font-family: Lato,sans-serif;
+        }
+        button{
+            background-color: #4CAF50;
+            font-family: Lato,sans-serif;
+            font-size: 15px;
+            display: block;
+            border: none;
+            height: 25px;
+            width: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        button:hover{
+            opacity: 0.8;
+        }
+        tr>td{
+            padding-top: 10px;
+        }
+        label{
+            margin-right: 20px;
+        }
+    </style>
     <body>
         <?php include_once "header.php";?>
-        <div class="signupform clearfix">
-            <div  class="form">
-                <form id="f" action="index.php" method='POST'>
-                    <label>Index no</label> <input type="text" name="id"><br>
-                    <label>Full Name</label> <input type="text" name="firstname"><br>
-                    <label>Email</label> <input type="email" name="email"><br>
-                    <label>Mobile</label> <input type="number" name="tel"><br>
-                    <label>Username</label> <input type="text" name="usn"><br>
-                    <label>Password</label> <input type="password" name="pwd1"><br>
-                    <label>Confirm password </label><input type="password" name="pwd2"><br>
-                    <button type="submit" name="submit"> Sign In</button><br>
+        <div class="signup_container">
+            <div class="signupform">
+                <form action="index.php" method='POST'>
+                    <table>
+                        <tr>
+                            <td><label>Index no</label></td>
+                            <td><input type="text" name="id" required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Full Name </label></td>
+                            <td><input type="text" name="firstname" required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Email</label></td>
+                            <td><input type="email" name="email" required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Mobile</label></td>
+                            <td><input type="number" name="tel" required maxlength="10"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Password </label></td>
+                            <td><input type="password" name="pwd1" required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Confirm password</label></td>
+                            <td> <input type="password" name="pwd2" required></td>
+                        </tr>
+                    </table>
+                    <button type="submit">Sign Up</button>
                 </form>
             </div>
         </div>
-
-         // Database details
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "ems";
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } 
-
-        // Get data
-        $studentsql = "SELECT password FROM students WHERE id='".$_POST['usn']."'";
-        $studentquery = $conn->query($studentsql);
         <?php include_once "footer.php";?>
+    </body>
+</html>

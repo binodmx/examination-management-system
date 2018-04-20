@@ -4,99 +4,76 @@
         <title>
             Contact Us
         </title>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <style>
+            .chip {
+                display: inline-block;
+                padding: 0 25px;
+                height: 50px;
+                font-size: 16px;
+                line-height: 50px;
+                border-radius: 25px;
+                background-color: #f1f1f1;
+            }
+
+            .chip img {
+                float: left;
+                margin: 0 10px 0 -25px;
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+            } 
+        </style>
     </head>
     <body>
-
+        
         <?php include_once "header.php";?>
-        <div class="cu_wrapper">
-            <div class="contact_us"><p><strong>Examinations &amp; Registration Division</strong></p>
 
-                <p><strong>Contact Numbers : 0112650586 (Direct Line), 0112640519</strong></p>
+                <div class="chip">
+                    <img src="imgs/home.png" alt="Address" width="96" height="96">
+                    University of Moratuwa, Bandaranayake Mawatha, Katubedda, Moratuwa. 10400
+                </div><br><br>
 
-                <p>Email :&nbsp;<a href="mailto:exams@uom.lk">exams@uom.lk</a></p>
+                <div class="chip">
+                    <img src="imgs/phone.png" alt="Phone" width="96" height="96">
+                    +94112650534 +94112650188
+                </div>
 
-                <p>&nbsp;</p>
+                <div class="chip">
+                    <img src="imgs/email.png" alt="Email" width="96" height="96">
+                    info@mrt.ac.lk
+                </div>
 
-                <p><strong>Senior Assistant Registrar - Examinations &amp; Registration</strong></p>
+                <div class="chip">
+                    <img src="imgs/fax.png" alt="Fax" width="96" height="96">
+                    +94112650622
+                </div>
 
-                <p><strong>Ms. Dineshi Nandasena</strong>&nbsp;</p>
+                <div class="chip">
+                    <img src="imgs/fb.png" alt="Facebook" width="96" height="96">
+                    http://www.facebook.com/
+                </div><br><br>
 
-                <p>Email :&nbsp;<a href="mailto:sar-exams@uom.lk">sar-exams@uom.lk</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                <div class="chip">
+                    <img src="imgs/youtube.png" alt="Youtube" width="96" height="96">
+                    http://www.youtube.com/user/uomwebteam/videos
+                </div><br><br>
 
-                <p>Ext : 1401</p>
+                <div class="chip">
+                    <img src="imgs/linkedin.png" alt="Linkedin" width="96" height="96">
+                    http://www.linkedin.com/edu/university-of-moratuwa-14828<br>
+                </div><br><br>
 
-                <p>&nbsp;</p>
+                <div class="chip">
+                    <img src="imgs/twitter.png" alt="Twitter" width="96" height="96">
+                    http://twitter.com/MoratuwaUni<br>
+                </div><br><br>
 
-                <p><strong>Programmer cum Systems Analyst</strong></p>
-
-                <p><strong>Mr.Tharindu Gardiyawasam</strong></p>
-
-                <p>Ext :&nbsp;3846</p>
-
-                <p>&nbsp;</p>
-
-                <p><strong>examination Results</strong></p>
-
-                <p><strong>Eng&nbsp;&amp; TLM</strong></p>
-
-                <p><strong>Ms.&nbsp;Sandya Singhabahu</strong></p>
-
-                <p><strong>Mr. Romesh Karunarathna</strong></p>
-
-                <p>Ext :&nbsp;1402</p>
-
-                <p>&nbsp;</p>
-
-                <p><strong>Archi, BDes, IT, ITM,&nbsp;TCP, BIT</strong></p>
-
-                <p><strong>Mr.&nbsp;Rohitha Siriwardhane</strong></p>
-
-                <p>Ext : 1402</p>
-
-                <p>&nbsp;</p>
-
-                <p><b>QS &amp; FM</b></p>
-
-                <p><strong>Ms.&nbsp;Chamika Meepage</strong></p>
-
-                <p>Ext : 1402</p>
-
-                <p>&nbsp;</p>
-
-                <p><b>Postgraduate</b></p>
-
-                <p><strong>Ms.&nbsp;Nayani</strong></p>
-
-                <p>Ext : 1402</p>
-
-                <p>&nbsp;</p>
-
-                <p><strong>Registration</strong></p>
-
-                <p><strong>Eng (MPR)</strong></p>
-
-                <p><strong>Ms. Nipuni&nbsp;Pramoda</strong></p>
-
-                <p>Ext : 3845</p>
-
-                <p>&nbsp;</p>
-
-                <p><strong>Eng (EM), Eng (TM), Archi, BDes, QS, FM, TCP, BLA</strong></p>
-
-                <p><strong>Mr. Sanjaya Bandara</strong></p>
-
-                <p>Ext : 1406</p>
-
-                <p>&nbsp;</p>
-
-                <p><strong>IT, IT&amp;M, TLM, FD</strong></p>
-
-                <p><strong>Ms. Umangali Amarakoon</strong></p>
-
-                <p>Ext : 1406</p>
-            </div>
-        </div>
+                <div class="chip">
+                    <img src="imgs/googleplus.png" alt="GooglePlus" width="96" height="96">
+                    https://plus.google.com/118354321025436191714/posts<br>
+                </div><br><br>
+       
+    
         <?php include_once "footer.php";?>
         
     </body>
