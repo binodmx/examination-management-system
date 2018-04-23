@@ -37,6 +37,7 @@
                 include_once "../dbconnect.php";
                 // Identify student
                 $studentid = $_SESSION['studentid'];
+                
                 $studentsql = "SELECT semester, department FROM students WHERE id='$studentid'";
                 $studentquery = $conn->query($studentsql);
                 $studentqueryrow = $studentquery->fetch_assoc();

@@ -12,6 +12,7 @@
         $modulerow = $modulequery->fetch_assoc();
         $name = $modulerow["name"];
         $semester= $modulerow["semester"];
+        
         $insertsql ="INSERT INTO stu_".$studentid."_results VALUES ('$moduleid', '$name', '$semester', 'NA')";
         $conn->query($insertsql);
     }

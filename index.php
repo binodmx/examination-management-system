@@ -14,6 +14,7 @@
         <?php include_once "header.php";?>
         
         <div class="middle_bar">
+            <br><br>
             <img class="mySlides" src="imgs/home_img1.jpg" >
             <img class="mySlides" src="imgs/home_img2.jpg" >
             <img class="mySlides" src="imgs/home_img3.jpg" >

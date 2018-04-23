@@ -1,61 +1,17 @@
-#header{
 
-}
-.footer{
-	overflow: auto
-	height: 100px;
-    background-color: #b3b3b3;
-}
-.footer p{
-	font-family: "Open Sans";
-    font-weight: lighter;
-    margin-top:25px;
-    margin-right: 20px;
-    font-size: 20px;
-    float: right;
-}
 .clearfix{
     overflow: auto 
 }
 .middle_bar{
     font-family: "Open Sans";
     height: 480px;
-    top: 193px;
-    background-color:#95c2ce ;
+    top: 190px;
+    background-color:#d4d4d4 ;
+    position: fixed;
+    left:0; 
+    width:100%;
 }
-.signin_div{
-    background-color:#e6e6e6;
-    height: 500px;
-}
-.signin_form{
-    width: 300px;
-    margin: 0 auto;
-    padding:90px 0px;
-}
-.signin_form input{
-    width: 92%;
-    margin-top: 30px;
-    padding:0px 10px;
-    height: 25px;
-    font-size: 15px;
-    font-family: "Open Sans";
-}
-.signin_form button{
-    margin-top: 30px;
-    background-color: #00e6e6;
-    display: block;
-    cursor: pointer;
-    width: 100%;
-    height: 30px;
-    border: 1px solid black;
-    font-family: "Open Sans";
-    font-size: 15px;
 
-}
-.signin_form button:hover{
-  background-color: rgba(48,243,228,0.87);
-
-}
 table {
 	border: 1px solid black;
 	/*border-collapse: collapse;*/
@@ -93,16 +49,15 @@ a{
 }
 .top_bar{
     width:100%;
-    background: linear-gradient(#33ccff,#b3ecff);
+    background: linear-gradient(#19334d, #3973ac);
 
 }
 .top_bar_links{
     float: left;
     width: 100%;
-    background-color:#b3b3b3;
-    border-style:solid;
-    border-width: 1px;
-    border-color: black;
+    background-color:#3e3e3f;
+    display:flex; 
+    justify-content:center
 }
 
 .top_bar_links nav ul{
@@ -110,7 +65,7 @@ a{
 
 }
 .top_bar_links nav ul li{
-    background-color: #b3b3b3;
+    background-color: #3e3e3f;
     list-style: none;
     float:left;
     position: relative;
@@ -122,14 +77,14 @@ a{
     border: blue;
 }
 .top_bar_links nav ul li a{
-    color: black;
+    color: white;
     display: block;
     font-family: "Open Sans";
     font-size: 18px;
     padding: 15px 15px;
 }
 .top_bar_links nav ul li a:hover{
-    background-color:  #e6e6e6;
+    background-color:  #3973ac;
 }
 .top_bar_links nav ul li ul{
     position: absolute;
@@ -183,21 +138,23 @@ a{
 }
 
 .header h1{
-    font-family:sans-serif;
+    font-family:Ubuntu;
     font-weight: normal;
-    font-size: 48px;
-    text-align: center;
+    font-size: 36px;
+    text-align: 20px;
     margin-top: 15px;
+    color:white;
 }
 .header p{
     font-family:"Ubuntu";
     font-weight: normal;
-    font-size: 30px;
-    text-align: center;
+    font-size: 24px;
+    text-align: 20px;
+    color:white;
 }
 .image{
     float: left;
-    margin-left: 70px;
+    margin-left: 40px;
 
 }
 .welcome_bar{
@@ -291,11 +248,11 @@ a{
 /*===============================================================================================================================*/
 /* The sidebar menu */
 .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
+    height: 450px; /* Full-height: remove this if you want "auto" height */
     width: 220px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
-    top: 193px; /* Stay at the top */
+    top: 190px; /* Stay at the top */
     left: 0;
     background-color: #111; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
@@ -315,12 +272,23 @@ a{
 .sidenav a:hover {
     color: #f1f1f1;
 }
+
 /* The middle bar*/
 .middlediv{
     font-family: "Open Sans";
-    height: 480px;
-    top: 193px;
+    height: 520px;
+    top: 190px;
     margin-left: 220px; /* Same as the width of the sidebar */
     padding: 0px 10px;
-    background-color:#95c2ce ;
+    background-color:#d4d4d4 ;
+}
+
+/* The footer (bottom line of every page)*/
+.footer{
+    position: fixed;
+    left:0; bottom: 0;
+    width:100%;
+    text-align:center;
+    background-color: #3e3e3f;
+    color:white
 }

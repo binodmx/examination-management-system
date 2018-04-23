@@ -1,6 +1,9 @@
 <?php 
 	echo
-		'<p style="position: fixed; bottom: 0; width:100%; text-align: center">
-			&copy 2018. All rights reserved
-		</p>'
+		"<p class='footer'>
+			<br>
+			&copy 2018 All rights reserved
+			<br>
+			<br>
+		</p>"
 ?>

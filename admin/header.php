@@ -7,15 +7,16 @@
     echo 
         "<link rel='stylesheet' type='text/css' href='../css/styles.css'>
         <div class='wrapper'>
-            <div class='top_bar clearfix'>
-                <div class='image clearfix'>
-                    <img src='../imgs/mora.png' width='113.333px' height='137px'>
-                </div>
-                <div class='header'>
-                    <h1>Examination Management System</h1>
-                    <h2 align='center'>University of Moratuwa</h2>
-                </div>
-            </div>
+        <div class='top_bar clearfix'>
+        <div class='image clearfix'>
+            <a href='../index.php'><img src='../imgs/mora.png' width='113.333px' height='137px'></a>
+        </div>
+        <div class='header'>
+        <br>
+            <h1>Examination Management System</h1>
+            <p>University of Moratuwa</p>
+        </div>
+    </div>
             
             <div class='top_bar_links'>
                 <nav>
