@@ -133,13 +133,21 @@
                         include_once "dbconnect.php";
                         $sql = "SELECT id FROM students WHERE id='".$_POST['id']."'";
                         $qry = $conn->query($sql);
+                        // check whether already a user or not
                         if($qry->num_rows>0){
                             echo "You have already registered!";
                         }else{
                             // register student
-                            $id=$_POST['id'];$fn=$_POST['fn'];$ni=$_POST['ni'];$fa=$_POST['fa'];
-                            $dp=$_POST['dp'];$sm=$_POST['sm'];$p1=md5($_POST['p1']);$mo=$_POST['mo'];$em=$_POST['em'];
-                            $sql="INSERT INTO students VALUES ('$id', '$fn', '$ni', '$fa', '$dp','$sm','$p1','$mo','$em','0')";
+                            $id=$_POST['id'];
+                            $fn=$_POST['fn'];
+                            $ni=$_POST['ni'];
+                            $fa=$_POST['fa'];
+                            $dp=$_POST['dp'];
+                            $sm=$_POST['sm'];
+                            $p1=md5($_POST['p1']);
+                            $mo=$_POST['mo'];
+                            $em=$_POST['em'];
+                            $sql="INSERT INTO students VALUES ('$id', '$fn', '$ni', '$fa', '$dp','$sm','$p1','$mo','$em','0','' )";
                             if($conn->query($sql)===TRUE){header("Location:signin.php");}
                         }
                     }
