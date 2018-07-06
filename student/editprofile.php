@@ -6,12 +6,10 @@
             Edit Profile
         </title>
         <style>
-            * {
-                box-sizing: border-box;
-            }
             label {
                 padding: 12px 12px 12px 0;
                 display: inline-block;
+                box-sizing: border-box;
             }
             input, select, textarea {
                 width: 85%;
@@ -20,6 +18,7 @@
                 border-radius: 4px;
                 resize: vertical;
                 float: right;
+                box-sizing: border-box;
             }
             input[type=submit] {
                 background-color: #4CAF50;
@@ -29,10 +28,11 @@
                 border-radius: 4px;
                 cursor: pointer;
                 float: right;
+                box-sizing: border-box;
             }
 
         </style>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
     </head>
     <body>
         <?php
@@ -75,6 +75,6 @@
                     </div>";
             }
         ?>
-
+<?php include_once "footer.php";?>
     </body>
 </html>

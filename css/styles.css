@@ -1,91 +1,99 @@
-#header{
-
-}
-.footer{
-	overflow: auto;
-	height: 100px;
-    background-color: #000000;
-}
-.footer p{
-	font-family: Lato;
-    margin-top:25px;
-    margin-right: 20px;
-    text-align: center;
-    font-size: 15px;
-    color: #ffffff;
-
-}
-.clearfix{
-    overflow: auto 
-}
-.middle_bar{
-    font-family: "Open Sans";
-    height: 480px;
-    top: 193px;
-    background-color:#95c2ce ;
-}
-.signin_div{
-    background-color:#e6e6e6;
-    height: 500px;
-}
-
-
 /*imported*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
-*{margin:0; padding: 0;}
 
+*{
+    margin:0; 
+    padding: 0;
+}
 
+.clearfix{
+    overflow: auto 
+}
+
+.middle_bar{
+    font-family: "Open Sans";
+    height: 500px;
+    top: 190px;
+    background-color:#d4d4d4 ;
+    position: fixed;
+    left:0; 
+    width:100%;
+}
+
+table {
+	border: 1px solid black;
+	/*border-collapse: collapse;*/
+    border-spacing: 1px;
+}
+
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+    padding: 5px;
+} 
+
+th {
+	border: 1px solid black;
+	border-collapse: collapse;
+    text-align: left;
+    padding: 5px;
+}
 
 a{
     text-decoration:none;
 }
+
 .wrapper{
     width: 100%;
     margin: 0 auto;
-
 }
+
 .top_bar{
     width:100%;
-    background: linear-gradient(#33ccff,#b3ecff);
-
+    background: linear-gradient(#19334d, #3973ac);
 }
+
 .top_bar_links{
     float: left;
     width: 100%;
-    background-color:#b3b3b3;
-    border-style:solid;
-    border-width: 1px;
-    border-color: black;
+    background-color:#3e3e3f;
+    display:flex; 
+    justify-content:center
 }
 
 .top_bar_links nav ul{
     float:left;
 
 }
+
 .top_bar_links nav ul li{
-    background-color: #b3b3b3;
+    background-color: #3e3e3f;
     list-style: none;
     float:left;
     position: relative;
     display: block;
 }
+
 .top_bar_links nav ul li:nth-child(2) img{
     width: 20px;
     height: 15px;
     border: blue;
 }
+
 .top_bar_links nav ul li a{
-    color: black;
+    color: white;
     display: block;
     font-family: "Open Sans";
     font-size: 18px;
     padding: 15px 15px;
 }
+
 .top_bar_links nav ul li a:hover{
-    background-color:  #e6e6e6;
+    background-color:  #3973ac;
 }
+
 .top_bar_links nav ul li ul{
     position: absolute;
     display: none;
@@ -93,16 +101,18 @@ a{
     border-style: solid;
     border-width: 1px;
 }
+
 .top_bar_links nav ul li:hover ul{
     display: block;
 }
+
 .top_bar_links nav ul li ul li{
     width: 250px;
 }
+
 .top_bar_links nav ul li ul li a{
     padding: 8px 20px;
 }
-
 
 .site_search{
     float:right ;
@@ -110,8 +120,8 @@ a{
     margin-top: 100px;
     background: white;
     border-radius: 12.5px
-
 }
+
 .site_search input{
     border:none;
     width: 150px;
@@ -119,10 +129,10 @@ a{
     font-size: 15px;
     margin-left: 15px;
 }
+
 .site_search input.placeholder{
     color:    #909;
 }
-
 
 .site_search button{
     border:none;
@@ -131,37 +141,43 @@ a{
     width: 25px;
     background: url(../icon/search.png);
     background-size: 25px 25px;
-
 }
+
 .header{
     float:middle;
 }
 
 .header h1{
-    font-family:sans-serif;
+    font-family:Ubuntu;
     font-weight: normal;
-    font-size: 48px;
-    text-align: center;
+    font-size: 36px;
+    text-align: 20px;
     margin-top: 15px;
+    color:white;
 }
+
 .header p{
     font-family:"Ubuntu";
     font-weight: normal;
-    font-size: 30px;
-    text-align: center;
+    font-size: 24px;
+    text-align: 20px;
+    color:white;
 }
+
 .image{
     float: left;
-    margin-left: 70px;
-
+    margin-left: 40px;
 }
+
 .welcome_bar{
     width: 1000px;
     background-color: #e6e6e6;
 }
+
 .welcome_message{
     margin: 20px;
 }
+
 .welcome_message h2{
     margin:5px;
     text-align: center;
@@ -169,6 +185,7 @@ a{
     font-weight:  100;
     font-size: 30px;
 }
+
 .welcome_message p{
     text-align: center;
     font-family: "Open Sans";
@@ -180,32 +197,37 @@ a{
     width: 1000px;
     background-color: lightgrey;
 }
+
 .select ul{
     list-style: none;
 }
+
 .exam_calander{
     text-align: center;
     width: 500px;
     float: left;
-
-
 }
+
 .exam_calander h2{
     font-weight: lighter;
     border-color: black;
 }
+
 .news{
     text-align: center;
     width: 500px;
     float: right;
 }
+
 .news h2{
     font-weight: lighter;
 }
+
 .follow{
     height: 100px;
     background-color: #b3b3b3;
 }
+
 .follow p{
     font-family: "Open Sans";
     font-weight: lighter;
@@ -214,9 +236,11 @@ a{
     font-size: 20px;
     float: right;
 }
+
 .icon{
     margin: 5px;
 }
+
 .icon img {
     float: right;
     margin-top: 20px;
@@ -224,33 +248,46 @@ a{
     width: 35px;
 }
 
-
-/*.signupform{
+.signupform{
     width: 1000px;
     height: 400px;
     background-color: #e6e6e6 ;
 }
+
 .signupform table{
     margin: 0 auto;
     padding-top: 30px;
 }
+
 .signupform table tr{
     font-family: "Open Sans";
     padding: 10px 10px;
 
 }
+
 .signupform table tr td{
     margin-bottom: 10px;
 
-}*/
+}
+
+.footer{
+    position: fixed;
+    left:0; 
+    bottom:0;
+    padding:10px 0px 10px 0px;
+    width:100%;
+    text-align:center;
+    background-color: #3e3e3f;
+    color:white
+}
 /*===============================================================================================================================*/
 /* The sidebar menu */
 .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
+    height: 450px; /* Full-height: remove this if you want "auto" height */
     width: 220px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
-    top: 193px; /* Stay at the top */
+    top: 190px; /* Stay at the top */
     left: 0;
     background-color: #111; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
@@ -270,12 +307,13 @@ a{
 .sidenav a:hover {
     color: #f1f1f1;
 }
+
 /* The middle bar*/
 .middlediv{
     font-family: "Open Sans";
-    height: 480px;
-    top: 193px;
+    height: 520px;
+    top: 190px;
     margin-left: 220px; /* Same as the width of the sidebar */
     padding: 0px 10px;
-    background-color:#95c2ce ;
+    background-color:#d4d4d4 ;
 }

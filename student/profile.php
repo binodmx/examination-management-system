@@ -14,7 +14,7 @@
                 unset($_SESSION['studentid']);
                 session_destroy();
                 header("Location:../index.php");
-            }else if(isset($_SESSION['studentid'])){
+            }else if(isset($_SESSION['user'])){
                 echo "<div class='middlediv'></div>";
                 include_once "sidebar.php";
             
