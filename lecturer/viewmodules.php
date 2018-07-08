@@ -1,12 +1,12 @@
 <?php 
-    include_once "../classes/student.php";
+    include_once "../classes/lecturer.php";
     include_once "../classes/module.php";
     session_start();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registered Modules</title>
+    <title>My Modules</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
 <body>
@@ -21,21 +21,19 @@
             include_once ("../dbconnect.php");
 
             // Identify student
-            $student = $_SESSION['user'];
-            $semester = $student->getSemester();
-            $registered = $student->isRegistered($semester);
+            $lecturer = $_SESSION['user'];
+            $modules = $lecturer->getModules();
 
-            if ($registered) {
-                $id=$student->getId(); 
-                $name = $student->getName();
-                $modules=$student->getModules($semester); 
+            if (count($modules)>0) {
+                $id=$lecturer->getId(); 
+                $name = $lecturer->getName();
                 
                 echo "<br><br><br>";
                 echo
                     "Index No : $id <br>
                     Name : $name <br>
                     <table style='margin-left:50px;'>
-                        <caption id='cpt1'>Registered Modules for Semester ".$semester."  </caption>
+                        <caption id='cpt1'>My Modules </caption>
                         <tr>
                             <th>Module ID</th>
                             <th>Module Name</th>

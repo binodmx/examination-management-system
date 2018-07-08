@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EMS - UoM</title>
+    <title>Convocation</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <style>
         label {

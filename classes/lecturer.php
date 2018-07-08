@@ -12,7 +12,9 @@ class Lecturer extends User{
         //destroy paper object
     }
     public function addModule($module){
-        array_push($this->modules, $module);
+        if (!in_array($module, $this->modules)){
+            array_push($this->modules, $module);
+        }
     }
     public function getModules() {
         return $this->modules;

@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php 
-    if(isset($_GET['msg']) && $_GET['msg'] == 'signupsuccessful'){echo "<script type='text/javascript'>alert('Sign up successful!');</script>";}
+    if(isset($_GET['msg']) && $_GET['msg'] == 'signupsuccessful'){echo "<script type='text/javascript'>alert('Add member successful!');</script>";}
     include_once "header.php";
     include_once "sidebar.php";
     include_once "../footer.php";
@@ -44,6 +44,7 @@
                         if (isset($_POST['fa'])){$student->setFaculty($_POST['fa']);};
                         if (isset($_POST['dp'])){$student->setDepartment($_POST['dp']);};
                         $student->setSemester("1");
+                        $student->setBatch(date("Y"));
                         $val = serialize($student);
                         $sql = "INSERT INTO students(id, val, pwd) VALUES ('$id', '$val', '$pd')";
                         if($conn->query($sql)===TRUE){header("Location:signupmembers.php?msg=signupsuccessful");}
@@ -77,7 +78,7 @@
 <div class="login"><br><br><br>
     <form action="signupmembers.php" method="POST">
     <fieldset>
-        <legend align="center"><h1>Sign Up Members</h1></legend><br>
+        <legend align="center"><h1>Add Members</h1></legend><br>
         <?php if (isset($error) && !empty($error)) {echo '<p class="error">'.$error.'</p>';}?>
         <div class="row">
             <div class="column">

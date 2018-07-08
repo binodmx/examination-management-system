@@ -11,10 +11,9 @@
     <img class="mySlides" src="imgs/home_img3.jpg" >
     <img class="mySlides" src="imgs/home_img4.jpg" ><br>
     <div class="home_mid">
-        <p style="text-align:justify">
-            Examination Management System (EMS) provides various important student related services such as student registration, 
-            undergraduate and postgraduate examinations related activities, conducting aptitude tests, issuing examination results, 
-            issuing academic transcripts and degree certificates etc.
+        <p style="text-align:center">
+            Examination Management System (EMS), similar to moodle, provides various important student related services such as register students and lecturers, 
+            register and view modules, apply recorrection, apply repeat exams, view examination results, apply for convocation, download past papers.
         </p>
     </div>
 </div>

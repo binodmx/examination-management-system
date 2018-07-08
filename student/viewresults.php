@@ -14,12 +14,11 @@
             box-sizing: border-box;
         }
         input, select, textarea {
-            width: 85%;
+            width: 5%;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             resize: vertical;
-            float: right;
             box-sizing: border-box;
         }
         input[type=submit] {
@@ -49,8 +48,9 @@
 
 ?>
         <div class='middlediv'>
+            <br><br><br>
             <!select semester>
-            <?php $semester=isset($_POST['sem'])?$_POST['sem']:''?>
+            <?php $semester=isset($_POST['semester'])?$_POST['semester']:''?>
             <form action='viewresults.php' method='POST'>
                 <label>Semester :</label>
                 <select name='semester' onchange="this.form.submit()">
@@ -70,23 +70,26 @@
                 
         // Identify student
         $student = $_SESSION['user'];
-        $semester = $student->getSemester();
+        $semester = $_POST['semester'];
 
-        if ($registered) {
+        if ($student->getResults($semester)) {
             $id=$student->getId(); 
             $name = $student->getName();
             $modules=$student->getModules($semester); 
-            
+            $results=$student->getResults($semester);
+
             echo "<br><br><br>";
             echo
                 "Index No : $id <br>
                 Name : $name <br>
+                SGPA : $results->getSGPA <br>
                 <table style='margin-left:50px;'>
-                    <caption id='cpt1'>Registered Modules for Semester ".$semester."  </caption>
+                    <caption id='cpt1'>Results for Semester ".$semester."  </caption>
                     <tr>
                         <th>Module ID</th>
                         <th>Module Name</th>
                         <th>Credits</th>
+                        <th>Marks</th>
                     </tr>";
                 
                 foreach ($modules as $m) {
@@ -94,20 +97,22 @@
                     $moduleid = $module->getID();
                     $modulename = $module->getName();
                     $modulecredits = $module->getCredits();
-                    $modulesemester = $module->getSemester();
+                    $modulemarks = $results->getMarks($moduleid);
                     echo
                         "<tr>
                             <td>$moduleid</td>
                             <td>$modulename</td>
                             <td>$modulecredits</td>
+                            <td>$modulemarks</td>
                         </tr>";
                 }
             echo "</table>";
-            } else {
-                echo "You have not registered for this semester!";
-            }
-        $conn->close(); 
-        ?>
-        </div>
-    </body>
+        } else {
+            echo "Results not available for this semester!";
+        }
+    }
+    $conn->close(); 
+    ?>
+</div>
+</body>
 </html>

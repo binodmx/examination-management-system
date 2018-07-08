@@ -10,10 +10,7 @@
     $modules = array();
     
     foreach ($moduleids as $moduleid){
-        $sql = "SELECT * FROM modules WHERE id='$moduleid'";
-        $qry = $conn->query($sql);
-        $row = $qry->fetch_assoc();
-        $modules = $modules + array($row['val']);
+        array_push($modules, $moduleid);
     }
 
     $student->register($semester, $modules);

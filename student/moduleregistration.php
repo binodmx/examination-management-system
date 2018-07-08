@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EMS - UoM</title>
+    <title>Register Modules</title>
     <style>
         input[type=submit]:hover {
             opacity: 0.8;

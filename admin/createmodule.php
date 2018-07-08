@@ -21,15 +21,19 @@
                 float: right;
                 box-sizing: border-box;
             }
-            input[type=submit] {
-                background-color: #4CAF50;
+                                input[type=submit] {
+                background-color: #123456;
                 color: white;
                 padding: 12px 20px;
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
+                font-size:16px;
                 float: right;
                 box-sizing: border-box;
+            }
+            input[type=submit]:hover {
+                opacity: 0.8;
             }
         </style>
         <link rel="stylesheet" type="text/css" href="../css/styles.css">
@@ -37,6 +41,7 @@
     <body>
         <?php
             if(isset($_GET['msg']) && $_GET['msg'] == 'updatesuccessful'){echo "<script type='text/javascript'>alert('Create module successful!');</script>";}
+            if(isset($_GET['msg']) && $_GET['msg'] == 'updatenotsuccessful'){echo "<script type='text/javascript'>alert('Create module not successful!');</script>";}
             if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
 
             include_once "header.php";
@@ -56,18 +61,23 @@
                 $val = serialize($module);
                 $updatesql = "INSERT INTO modules (id, val) VALUES ('$id', '$val')";
                 
-                if($conn->query($updatesql)===TRUE){header("Location:createmodule.php?msg=updatesuccessful");}
+                if($conn->query($updatesql)===TRUE){
+                    header("Location:createmodule.php?msg=updatesuccessful");
+                } else {
+                    $_POST=array();
+                    header("Location:createmodule.php?msg=updatenotsuccessful");
+                }
 
             } else {  // get data
                 echo 
                     "<div class='middlediv'>
                         <form action='createmodule.php' method='POST'>
                             <br><br><br>   
-                            <label>Module ID: </label><input type='text' name='id'><br>
+                            <label>Module ID: </label><input type='text' name='id' autofocus><br>
                             <label>Module Name: </label><input type='text' name='name'><br>
                             <label>Semester: </label><input type='text' name='semester'><br>
                             <label>Credits: </label><input type='text' name='credits'><br>
-                            <label>Departments: </label><select name='department'>
+                            <label>Department: </label><select name='department'>
                                 <option value='bmd' selected>Bio Medical Engineering</option>
                                 <option value='cse' >Computer Science and Engineering</option>
                                 <option value='civ' >Civil Engineering</option>

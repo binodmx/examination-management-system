@@ -28,14 +28,19 @@
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
+                font-size:16px;
                 float: right;
                 box-sizing: border-box;
+            }
+            input[type=submit]:hover {
+                opacity: 0.8;
             }
         </style>
         <link rel="stylesheet" type="text/css" href="../css/styles.css">
     </head>
     <body>
         <?php
+            if(isset($_GET['msg']) && $_GET['msg'] == 'updatenotsuccessful'){echo "<script type='text/javascript'>alert('Update not successful!');</script>";}
             if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
 
             $admin = $_SESSION['user'];
@@ -55,9 +60,17 @@
                 $sql = "SELECT pwd FROM admins WHERE id='".$id."'"; 
                 $qry = $conn->query($sql);
                 $row = $qry->fetch_assoc();
-                // add password update methods
-                
-                if($conn->query($updatesql)===TRUE){header("Location:profile.php?msg=updatesuccessful");}
+                $oldpwd = $row['pwd'];
+                $newpwd = md5($_POST['pwd2']);
+
+                if ($_POST['pwd2'] != "" && $oldpwd == md5($_POST['pwd1']) && $_POST['pwd2'] == $_POST['pwd3']){
+                    $updatesql = "UPDATE admins SET val='$val', pwd='$newpwd' WHERE id='$id'";
+                    if($conn->query($updatesql)===TRUE){header("Location:profile.php?msg=updatesuccessful");}
+                } else if ($_POST['pwd1'] == "" && $_POST['pwd2'] == "" && $_POST['pwd3'] == ""){
+                    if($conn->query($updatesql)===TRUE){header("Location:profile.php?msg=updatesuccessful");}
+                } else {
+                    header("Location:editprofile.php?msg=updatenotsuccessful");
+                }
             } else {  // get data
                 echo 
                     "<div class='middlediv'>
