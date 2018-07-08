@@ -1,10 +1,20 @@
+/*imported*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+*{
+    margin:0; 
+    padding: 0;
+}
 
 .clearfix{
     overflow: auto 
 }
+
 .middle_bar{
     font-family: "Open Sans";
-    height: 480px;
+    height: 600px;
     top: 190px;
     background-color:#d4d4d4 ;
     position: fixed;
@@ -31,27 +41,20 @@ th {
     padding: 5px;
 }
 
-/*imported*/
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
-*{margin:0; padding: 0;}
-
-
-
 a{
     text-decoration:none;
 }
+
 .wrapper{
     width: 100%;
     margin: 0 auto;
-
 }
+
 .top_bar{
     width:100%;
     background: linear-gradient(#19334d, #3973ac);
-
 }
+
 .top_bar_links{
     float: left;
     width: 100%;
@@ -64,6 +67,7 @@ a{
     float:left;
 
 }
+
 .top_bar_links nav ul li{
     background-color: #3e3e3f;
     list-style: none;
@@ -71,11 +75,13 @@ a{
     position: relative;
     display: block;
 }
+
 .top_bar_links nav ul li:nth-child(2) img{
     width: 20px;
     height: 15px;
     border: blue;
 }
+
 .top_bar_links nav ul li a{
     color: white;
     display: block;
@@ -83,9 +89,11 @@ a{
     font-size: 18px;
     padding: 15px 15px;
 }
+
 .top_bar_links nav ul li a:hover{
     background-color:  #3973ac;
 }
+
 .top_bar_links nav ul li ul{
     position: absolute;
     display: none;
@@ -93,16 +101,18 @@ a{
     border-style: solid;
     border-width: 1px;
 }
+
 .top_bar_links nav ul li:hover ul{
     display: block;
 }
+
 .top_bar_links nav ul li ul li{
     width: 250px;
 }
+
 .top_bar_links nav ul li ul li a{
     padding: 8px 20px;
 }
-
 
 .site_search{
     float:right ;
@@ -110,8 +120,8 @@ a{
     margin-top: 100px;
     background: white;
     border-radius: 12.5px
-
 }
+
 .site_search input{
     border:none;
     width: 150px;
@@ -119,10 +129,10 @@ a{
     font-size: 15px;
     margin-left: 15px;
 }
+
 .site_search input.placeholder{
     color:    #909;
 }
-
 
 .site_search button{
     border:none;
@@ -131,8 +141,8 @@ a{
     width: 25px;
     background: url(../icon/search.png);
     background-size: 25px 25px;
-
 }
+
 .header{
     float:middle;
 }
@@ -145,6 +155,7 @@ a{
     margin-top: 15px;
     color:white;
 }
+
 .header p{
     font-family:"Ubuntu";
     font-weight: normal;
@@ -152,18 +163,21 @@ a{
     text-align: 20px;
     color:white;
 }
+
 .image{
     float: left;
     margin-left: 40px;
-
 }
+
 .welcome_bar{
     width: 1000px;
     background-color: #e6e6e6;
 }
+
 .welcome_message{
     margin: 20px;
 }
+
 .welcome_message h2{
     margin:5px;
     text-align: center;
@@ -171,6 +185,7 @@ a{
     font-weight:  100;
     font-size: 30px;
 }
+
 .welcome_message p{
     text-align: center;
     font-family: "Open Sans";
@@ -182,32 +197,37 @@ a{
     width: 1000px;
     background-color: lightgrey;
 }
+
 .select ul{
     list-style: none;
 }
+
 .exam_calander{
     text-align: center;
     width: 500px;
     float: left;
-
-
 }
+
 .exam_calander h2{
     font-weight: lighter;
     border-color: black;
 }
+
 .news{
     text-align: center;
     width: 500px;
     float: right;
 }
+
 .news h2{
     font-weight: lighter;
 }
+
 .follow{
     height: 100px;
     background-color: #b3b3b3;
 }
+
 .follow p{
     font-family: "Open Sans";
     font-weight: lighter;
@@ -216,9 +236,11 @@ a{
     font-size: 20px;
     float: right;
 }
+
 .icon{
     margin: 5px;
 }
+
 .icon img {
     float: right;
     margin-top: 20px;
@@ -226,33 +248,46 @@ a{
     width: 35px;
 }
 
-
 .signupform{
     width: 1000px;
     height: 400px;
     background-color: #e6e6e6 ;
 }
+
 .signupform table{
     margin: 0 auto;
     padding-top: 30px;
 }
+
 .signupform table tr{
     font-family: "Open Sans";
     padding: 10px 10px;
 
 }
+
 .signupform table tr td{
     margin-bottom: 10px;
 
 }
+
+.footer{
+    position: fixed;
+    left:0; 
+    bottom:0;
+    padding:10px 0px 10px 0px;
+    width:100%;
+    text-align:center;
+    background-color: #3e3e3f;
+    color:white
+}
 /*===============================================================================================================================*/
 /* The sidebar menu */
 .sidenav {
-    height: 450px; /* Full-height: remove this if you want "auto" height */
+    height: 463px; /* Full-height: remove this if you want "auto" height */
     width: 220px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
-    top: 190px; /* Stay at the top */
+    top: 194px; /* Stay at the top */
     left: 0;
     background-color: #111; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
@@ -276,19 +311,9 @@ a{
 /* The middle bar*/
 .middlediv{
     font-family: "Open Sans";
-    height: 520px;
+    height: 555px;
     top: 190px;
     margin-left: 220px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
     background-color:#d4d4d4 ;
-}
-
-/* The footer (bottom line of every page)*/
-.footer{
-    position: fixed;
-    left:0; bottom: 0;
-    width:100%;
-    text-align:center;
-    background-color: #3e3e3f;
-    color:white
+    padding: 10px;
 }

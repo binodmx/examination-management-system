@@ -1,10 +1,12 @@
-<?php session_start();?>
+<?php 
+    include_once "classes/module.php";
+    include_once "classes/paper.php";
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>
-            Downloads
-        </title>
+        <title>Downloads</title>
         <style>
             * {
                 box-sizing: border-box;
@@ -25,81 +27,99 @@
                 margin-right:300px;
                 
             }
+            .mid_bar{
+                font-family: "Open Sans";
+                height: 490px;
+                top: 190px;
+                background-color:#d4d4d4 ;
+                position: fixed;
+                left:0; 
+                width:100%;
+            }
         </style>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
-    <body>
-        <?php include_once "header.php";?>
-
-        <div class="middle_bar">
-        <br>
-        <form action="downloads.php" method="POST">
-            <label>Department :</label>
-            <select name="department" onchange="this.form.submit()">
-                <option value="bmd" <?php if(isset($_POST['department']) && $_POST['department']=='bmd'){echo "selected";}?>>Bio Medical Engineering</option>
-                <option value="cse" <?php if(isset($_POST['department']) && $_POST['department']=='cse'){echo "selected";}?>>Computer Science and Engineering</option>
-                <option value="civ" <?php if(isset($_POST['department']) && $_POST['department']=='civ'){echo "selected";}?>>Civil Engineering</option>
-                <option value="che" <?php if(isset($_POST['department']) && $_POST['department']=='che'){echo "selected";}?>>Chemical and Process Engineering</option>
-                <option value="ele" <?php if(isset($_POST['department']) && $_POST['department']=='ele'){echo "selected";}?>>Electrical Engineering</option>
-                <option value="ent" <?php if(isset($_POST['department']) && $_POST['department']=='ent'){echo "selected";}?>>Electronic and Telecommunication Engineering</option>
-                <option value="mec" <?php if(isset($_POST['department']) && $_POST['department']=='mec'){echo "selected";}?>>Mechanical Engineering</option>
-                <option value="mat" <?php if(isset($_POST['department']) && $_POST['department']=='mat'){echo "selected";}?>>Material Sciences Engineering</option>
-            </select><br><br>
-            <label>Semester :   </label>
-            <select name="semester" onchange="this.form.submit()">
-                <option value="1" <?php if(isset($_POST['semester']) && $_POST['semester']==1){echo "selected";}?>>1</option>
-                <option value="2" <?php if(isset($_POST['semester']) && $_POST['semester']==2){echo "selected";}?>>2</option>
-                <option value="3" <?php if(isset($_POST['semester']) && $_POST['semester']==3){echo "selected";}?>>3</option>
-                <option value="4" <?php if(isset($_POST['semester']) && $_POST['semester']==4){echo "selected";}?>>4</option>
-                <option value="5" <?php if(isset($_POST['semester']) && $_POST['semester']==5){echo "selected";}?>>5</option>
-                <option value="6" <?php if(isset($_POST['semester']) && $_POST['semester']==6){echo "selected";}?>>6</option>
-                <option value="7" <?php if(isset($_POST['semester']) && $_POST['semester']==7){echo "selected";}?>>7</option>
-                <option value="8" <?php if(isset($_POST['semester']) && $_POST['semester']==8){echo "selected";}?>>8</option>
-            </select><br><br>
-            <?php
-                if(isset($_POST['semester']) && isset($_POST['department'])){
-                    include_once "dbconnect.php";
-                    $modulesql = "SELECT id, name FROM modules WHERE semester='".$_POST['semester']."' AND department='".$_POST['department']."'";
-                    $modulequery = $conn->query($modulesql);
-                    echo "<label>Module :</label>";
-                    echo "<select name='module' onchange='this.form.submit()'>";
-                    if($modulequery->num_rows>0){
-                        
-                        while($modulerow=$modulequery->fetch_assoc()){
-                            $selected=isset($_POST['module']) && $_POST['module']==$modulerow['id'] ? 'selected':' ';
-                            echo "<option value='".$modulerow['id']."' $selected>".$modulerow['id']." ".$modulerow['name']."</option>";
-                        }
-                        
-                    }else{
-                        echo "<option value='0' selected hidden></option>";
-                    }
-                    echo "</select><br><br>";
-                }
-            ?>
-        </form>
+<body>
+<?php 
+    include_once "header.php";
+    include_once "footer.php";
+?>
+    <div class="mid_bar"><br>
+    <form action="downloads.php" method="POST">
+        <label>Department :</label>
+        <select name="department" onchange="this.form.submit()">
+            <option value="bmd" <?php if(isset($_POST['department']) && $_POST['department']=='bmd'){echo "selected";}?>>Bio Medical Engineering</option>
+            <option value="cse" <?php if(isset($_POST['department']) && $_POST['department']=='cse'){echo "selected";}?>>Computer Science and Engineering</option>
+            <option value="civ" <?php if(isset($_POST['department']) && $_POST['department']=='civ'){echo "selected";}?>>Civil Engineering</option>
+            <option value="che" <?php if(isset($_POST['department']) && $_POST['department']=='che'){echo "selected";}?>>Chemical and Process Engineering</option>
+            <option value="ele" <?php if(isset($_POST['department']) && $_POST['department']=='ele'){echo "selected";}?>>Electrical Engineering</option>
+            <option value="ent" <?php if(isset($_POST['department']) && $_POST['department']=='ent'){echo "selected";}?>>Electronic and Telecommunication Engineering</option>
+            <option value="mec" <?php if(isset($_POST['department']) && $_POST['department']=='mec'){echo "selected";}?>>Mechanical Engineering</option>
+            <option value="mat" <?php if(isset($_POST['department']) && $_POST['department']=='mat'){echo "selected";}?>>Material Sciences Engineering</option>
+        </select><br><br><br>
+        <label>Semester :   </label>
+        <select name="semester" onchange="this.form.submit()">
+            <option value="1" <?php if(isset($_POST['semester']) && $_POST['semester']==1){echo "selected";}?>>1</option>
+            <option value="2" <?php if(isset($_POST['semester']) && $_POST['semester']==2){echo "selected";}?>>2</option>
+            <option value="3" <?php if(isset($_POST['semester']) && $_POST['semester']==3){echo "selected";}?>>3</option>
+            <option value="4" <?php if(isset($_POST['semester']) && $_POST['semester']==4){echo "selected";}?>>4</option>
+            <option value="5" <?php if(isset($_POST['semester']) && $_POST['semester']==5){echo "selected";}?>>5</option>
+            <option value="6" <?php if(isset($_POST['semester']) && $_POST['semester']==6){echo "selected";}?>>6</option>
+            <option value="7" <?php if(isset($_POST['semester']) && $_POST['semester']==7){echo "selected";}?>>7</option>
+            <option value="8" <?php if(isset($_POST['semester']) && $_POST['semester']==8){echo "selected";}?>>8</option>
+        </select><br><br><br>
         <?php
-            include_once "dbconnect.php";
-            
-            if(isset($_POST['semester']) && isset($_POST['department']) && isset($_POST['module'])){
-                $papersql = "SELECT id, year, link FROM papers WHERE id='".$_POST['module']."' AND semester='".$_POST['semester']."' AND department='".$_POST['department']."'";
-                $paperquery = $conn->query($papersql);
-                if($paperquery->num_rows>0){
-                    echo "<br><br><p style='color:green;text-align:center;'>Available papers</p><br>";
-                    $x=1;
-                    while($paperrow=$paperquery->fetch_assoc()){
-                        $modulesql = "SELECT name FROM modules WHERE id='".$paperrow['id']."'";
-                        $modulequery = $conn->query($modulesql);
-                        $modulerow = $modulequery->fetch_assoc();
-                        echo "<p style='text-align:center;'>"."{$x}. ".$paperrow['id']." ".$modulerow['name']." - ".$paperrow['year']." paper ";
-                        echo "<a href='".$paperrow['link']."' download>Download</a></p>";
-                        $x=$x+1;
+            if(isset($_POST['semester']) && isset($_POST['department'])){
+                include_once "dbconnect.php";
+                $sql = "SELECT * FROM modules";
+                $qry = $conn->query($sql);
+                echo "<label>Module :</label>";
+                echo "<select name='module' onchange='this.form.submit()'>";
+                if($qry->num_rows>0){
+                    while($row = $qry->fetch_assoc()){
+                        $module = unserialize($row['val']);                   
+                        if ($_POST['department'] == $module->getDepartment() && $module->getSemester() == $_POST['semester']){
+                            if (isset($_POST['module']) && $_POST['module'] == $module->getID()){
+                                $selected = "selected";
+                            } else {
+                                $selected = "";
+                            }
+                            if (!isset($_POST['module'])){
+                                $_POST['module'] = $module->getID();
+                            }
+                            echo "<option value='".$module->getID()."' $selected>".$module->getID()." ".$module->getName()."</option>";
+                        }
                     }
                 }else{
-                    echo "<br><br><p style='color:red;text-align:center;'>Not available!</p>";
+                    echo "<option value='0' selected hidden></option>";
                 }
+                echo "</select><br><br>";
             }
         ?>
-        </div>
-        <?php include_once "footer.php";?>
-    </body>
+    </form>
+    <?php
+        include_once "dbconnect.php";
+        if(isset($_POST['semester']) && isset($_POST['department']) && isset($_POST['module'])){
+            $psql = "SELECT * FROM papers WHERE id='".$_POST['module']."'";
+            $pqry = $conn->query($psql);
+            if($pqry->num_rows>0){
+                echo "<br><br><p style='color:green;text-align:center;'>Available papers</p><br>";
+                $x=1;
+                while($prow=$pqry->fetch_assoc()){
+                    $paper = unserialize($prow['val']);
+                    $msql = "SELECT * FROM modules WHERE id='".$paper->getID()."'";
+                    $mqry = $conn->query($msql);
+                    $mrow = $mqry->fetch_assoc();
+                    $module = unserialize($mrow['val']);
+                    echo "<p style='text-align:center;'>"."{$x}. ".$module->getID()." ".$module->getName()." - ".$paper->getYear()." paper ";
+                    echo "<a href='".$paper->getLink()."' download>Download</a></p>";
+                    $x=$x+1;
+                }
+            }else{
+                echo "<br><br><p style='color:red;text-align:center;'>Not available!</p>";
+            }
+        }
+    ?>
+    </div>
+</body>
 </html>

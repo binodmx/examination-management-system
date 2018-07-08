@@ -26,7 +26,6 @@
                         <li><a href='$profilePath'>Profile</a></li>
                         <li><a href='../contactus.php'>Contact Us</a></li>
                         <li><a href='../signin.php'>Sign In</a></li>
-                        <li><a href='../signup.php'>Sign Up</a></li>
                     </ul>
                 </nav>
             </div>

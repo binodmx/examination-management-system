@@ -1,5 +1,5 @@
 <?php 
-    include_once "../classes/student.php";
+    include_once "../classes/lecturer.php";
     session_start();
 ?>
 <!DOCTYPE html>
@@ -28,12 +28,8 @@
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
-                font-size:16px;
                 float: right;
                 box-sizing: border-box;
-            }
-            input[type=submit]:hover {
-                opacity: 0.8;
             }
         </style>
         <link rel="stylesheet" type="text/css" href="../css/styles.css">
@@ -41,8 +37,8 @@
     <body>
         <?php
             if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
-            $student = $_SESSION['user'];
-            $id = $student->getID();
+            $lecturer = $_SESSION['user'];
+            $id = $lecturer->getID();
 
             include_once "header.php";
             include_once "sidebar.php";   
@@ -50,14 +46,14 @@
             include_once "../dbconnect.php";
 
             if(isset($_POST['status'])){    // update data
-                $student->setName($_POST['name']);
-                $student->setMobile($_POST['mobile']);
-                $student->setEmail($_POST['email']);
-                $val = serialize($student);
-                $updatesql = "UPDATE students SET val='$val' WHERE id='$id'";
-                $_SESSION['user'] = $student;
+                $lecturer->setName($_POST['name']);
+                $lecturer->setMobile($_POST['mobile']);
+                $lecturer->setEmail($_POST['email']);
+                $val = serialize($lecturer);
+                $updatesql = "UPDATE lecturers SET val='$val' WHERE id='$id'";
+                $_SESSION['user'] = $lecturer;
 
-                $sql = "SELECT pwd FROM students WHERE id='".$id."'"; 
+                $sql = "SELECT pwd FROM lecturers WHERE id='".$id."'"; 
                 $qry = $conn->query($sql);
                 $row = $qry->fetch_assoc();
                 // add password update methods
@@ -68,10 +64,10 @@
                     "<div class='middlediv'>
                         <form action='editprofile.php' method='POST'>
                             <br><br><br>   
-                            <label>Index no: </label><input type='text' name='id' value='".$student->getID()."' disabled><br>
-                            <label>Full Name: </label><input type='text' name='name' value='".$student->getName()."'><br>
-                            <label>Email: </label><input type='email' name='email' value='".$student->getEmail()."'><br>
-                            <label>Mobile: </label><input type='number' name='mobile' value='".$student->getMobile()."' maxlength='10'><br>
+                            <label>Index no: </label><input type='text' name='id' value='".$lecturer->getID()."' disabled><br>
+                            <label>Full Name: </label><input type='text' name='name' value='".$lecturer->getName()."'><br>
+                            <label>Email: </label><input type='email' name='email' value='".$lecturer->getEmail()."'><br>
+                            <label>Mobile: </label><input type='number' name='mobile' value='".$lecturer->getMobile()."' maxlength='10'><br>
                             <label>Current Password: </label><input type='password' name='pwd1'><br>
                             <label>New password: </label><input type='password' name='pwd2'><br>
                             <label>Confirm password: </label><input type='password' name='pwd3'><br><br>

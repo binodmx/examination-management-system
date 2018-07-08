@@ -1,20 +1,25 @@
-<?php 
-    class paper{
+ <?php 
+    class Paper{
+        // property declaration
+        private $id;
         private $year;
         private $semester;
-        private $moduleId;
         private $department;
         private $link;
 
-        public function __construct( $md, $yr, $sm, $dp, $li){
-            $this->year = $yr;
-            $this->semester = $sm;
-            $this->moduleId = $md;
-            $this->department = $dp;
-            $this->link = $li;
+        // method declaration
+        public function __construct($id, $year, $semester, $department){
+            $this->id = $id;
+            $this->year = $year;
+            $this->semester = $semester;            
+            $this->department = $department;
+            $this->department = $link;
         }
         public function __destruct(){
             //destroy paper object
+        }
+        public function getID(){
+            return $this->id;
         }
         public function getYear(){
             return $this->year;
@@ -22,14 +27,11 @@
         public function getSemester(){
             return $this->semester;
         }
-        public function getModuleId(){
-            return $this->moduleId;
-        }
         public function getDepartment(){
             return $this->department;
         }
         public function getLink(){
             return $this->link;
-        }  
+        }
     }
 ?>

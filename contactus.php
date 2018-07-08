@@ -13,7 +13,6 @@
                 font-size: 16px;
                 line-height: 50px;
                 border-radius: 25px;
-                background-color: white;
                 width: 600px;
             }
 
@@ -25,7 +24,7 @@
                 border-radius: 50%;
             } 
             .contact_mid{
-                margin-left:30%;
+                margin-left:10%;
             }
         </style>
     </head>
@@ -68,7 +67,7 @@
 
                 <div class="chip">
                     <img src="imgs/home.png" alt="Address" width="96" height="96">
-                    University of Moratuwa, Bandaranayake Mawatha, Katubedda, Moratuwa. 10400
+                    University of Moratuwa, Bandaranayake Mawatha, Katubedda, Moratuwa.
                 </div>
         </div>
         </div>

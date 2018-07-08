@@ -1,73 +1,110 @@
-<?php session_start();?>
+<?php
+    include "../classes/student.php";
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            Results
-        </title>
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <style>
-              label {
-                padding: 8px 8px 8px 0;
-                display: inline-block;
-            }
-            input, select, textarea {
-                width: 85%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                resize: vertical;
-                float: right;
-            }
-             button {
-                background-color: #4CAF50;
-                color: white;
-                padding: 12px 20px;
-                margin: 6px 0;
-                border: none;
-                cursor: pointer;
-                width: 100%;
-            }
-            button:hover {
-                opacity: 0.8;
-            }
-        </style>
-    </head>
-    <body>
-        <?php 
-            include_once "header.php";
-            include_once "sidebar.php";
-        ?>
-        <div class="middlediv">
-            <?php 
-                include_once "../dbconnect.php";
+<head>
+    <title>EMS - UoM</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <style>
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        input, select, textarea {
+            width: 85%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            float: right;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            background-color: #123456;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            font-size:16px;
+            box-sizing: border-box;
+        }
+        input[type=submit]:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
 
-                if (isset($_POST['submit'])) {
-                    
-                    $id=$_POST['id'];
-                    $name=$_POST['name'];
-                    $email=$_POST['email'];
-                    $mobile=$_POST['tel'];
-                    $faculty=$_POST['faculty'];
-                    $department=$_POST['department'];
-                    $insertsql ="INSERT INTO `convocation` (`id`, `name`, `email`, `mobile`, `faculty`, `department`) VALUES ('$id', '$name', '$email', '$mobile', '$faculty', '$department')";
-                    $conn->query($insertsql);
-                    header("Location:profile.php");
-                }
-            ?>
-        <div class="container">
-            <form action="applyconvocation.php" method='POST'>
-                <label>Index no: </label><input type="text" name="id" value=<?php echo $_SESSION['studentid'];?> required disabled><br><br><br>
-                <label>Full Name: </label><input type="text" name="name" required><br><br>
-                <label>Email: </label><input type="email" name="email" required><br><br>
-                <label>Mobile: </label><input type="number" name="tel" required maxlength="10"><br><br>
-                <label>Faculty: </label><input type="text" name="faculty" required ><br><br>
-                <label>Department: </label><input type="text" name="department" required ><br><br>
-                <button type="submit" name='submit' >Submit</button>
-            </form>
-        </div>
-        </div>
+<?php
+    include_once "header.php";
+    include_once "sidebar.php";  
+    include_once "../footer.php";  
+    include_once "../dbconnect.php";
+?>
+    <div class="middlediv">
 
-        <?php include_once "footer.php";?>
-    </body>
+<?php
+
+    $student = $_SESSION['user'];
+    $id = $student->getId(); 
+    $name = $student->getName();
+    $email = $student->getEmail(); 
+    $mobile = $student->getMobile(); 
+
+    $sql = "SELECT id FROM convocationrequests WHERE id='".$id."'"; 
+    $qry = $conn->query($sql);
+    if($qry->num_rows>0){
+        echo "You have already applied for convocatoin!";
+    } else {
+
+    if ($student->getFaculty()=='en'){
+        $faculty = 'Engineering';
+    }
+    switch ($student->getDepartment()){
+        case 'bmd':
+            $department = 'Bio Medical Engineering';
+            break;
+        case 'cse':
+            $department = 'Computer Science and Engineering';
+            break;
+        case 'civ':
+            $department = 'Civil Engineering';
+            break;
+        case 'che':
+            $department = 'Chemical and Process Engineering';
+            break;
+        case 'ele':
+            $department = 'Electrical Engineering';
+            break;
+        case 'ent':
+            $department = 'Electronic and Telecommunication Engineering';
+            break;
+        case 'mec':
+            $department = 'Mechanical Engineering';
+            break;
+        case 'mat':
+            $department = 'Material Sciences Engineering';
+            break;
+    }
+     
+
+?>
+    <br><br><br>
+    <form action="recordconvocation.php" method='POST'>
+        <label>Index no: </label><input type="text" name="id" value="<?php echo($id) ?>" required disabled><br>
+        <label>Name on Certificate: </label><input type="text" name="name" value="<?php echo($name)  ?>" required><br>
+        <label>Email: </label><input type="email" name="email" value="<?php echo($email) ?>" required><br>
+        <label>Mobile: </label><input type="tel" name="tel" value="<?php echo($mobile) ?>" required maxlength="10"><br>
+        <label>Faculty: </label><input type="text" name="faculty" value="<?php echo($faculty) ?>" required disabled><br>
+        <label>Department: </label><input type="text" name="department" value="<?php echo($department) ?>"  required disabled><br><br>
+        <input type="submit" name='submit' value='Apply'>
+    </form>
+<?php } ?>
+</div>
+</body>
 </html>

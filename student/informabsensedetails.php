@@ -14,8 +14,7 @@
         ?>
         <div class="middlediv">
             <?php 
-                // Session availability
-                if(!isset($_SESSION['studentid'])){header("Location:../index.php");}
+                if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
                 $id=$_SESSION['studentid'];
                 include_once "../dbconnect.php";
                 // Identify student
