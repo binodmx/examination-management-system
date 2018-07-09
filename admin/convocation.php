@@ -28,7 +28,7 @@
 	
 	if($qry->num_rows>0){
 		$year=date("Y");
-		$table = "<br><br><br><table><caption>Conovacation Requests for ".$year."</caption>";
+		$table = "<br><br><br><table style='margin-left:250px'><caption>Conovacation Requests for ".$year."</caption>";
 		$table .= '<tr>
 						<th>Index Number</th>
 						<th>Full Name</th>

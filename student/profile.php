@@ -28,6 +28,7 @@
         if(isset($_GET['msg']) && $_GET['msg'] == 'applyconvocationsuccessful'){echo "<script type='text/javascript'>alert('Apply for convocation successful!');</script>";}
         if(isset($_GET['msg']) && $_GET['msg'] == 'applyconvocationnotsuccessful'){echo "<script type='text/javascript'>alert('Apply for convocation failed!');</script>";}
         if(isset($_GET['msg']) && $_GET['msg'] == 'registersuccessful'){echo "<script type='text/javascript'>alert('Register modules successful!');</script>";}
+        if(isset($_GET['msg']) && $_GET['msg'] == 'informadministrationsuccessful'){echo "<script type='text/javascript'>alert('Inform administration successful!');</script>";}
         include_once "header.php";
         if(isset($_GET['status']) && $_GET['status']=="signout"){
             unset($_SESSION['user']);

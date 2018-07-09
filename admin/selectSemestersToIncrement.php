@@ -12,7 +12,6 @@
 
 	 }
         label {
-            margin-left: 60px;
             padding: 12px 12px 12px 0;
             display: inline-block;
             box-sizing: border-box;

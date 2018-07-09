@@ -38,6 +38,7 @@
 </head>
 <body>
 	<?php
+    if(isset($_GET['msg']) && $_GET['msg'] == 'informadministrationnotsuccessful'){echo "<script type='text/javascript'>alert('Inform administration not successful!');</script>";}
     include_once "header.php";
     include_once "sidebar.php";  
     include_once "../footer.php";  
@@ -52,16 +53,15 @@
 <div class="middlediv">
 
 
-  <form action="recordStudentquaries.php" method='POST'>
+  <form action="recordstudentqueries.php" method='POST'>
     <br><br><br>
     <label for="indexno">Index number:</label>
     <input type="text" name="id" value="<?php echo($id) ?>" required disabled>
 
-    
     <label for="message">Message:</label>
-    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" required></textarea>
+    <textarea id="subject" name="message" placeholder="Write something.." style="height:200px" required></textarea>
 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" name="submit">
   </form>
 
 </div>
