@@ -1,5 +1,5 @@
 <style>
-    .mySlides {display: block; margin-left: auto; margin-right: auto; width: 40vw;height:20vw;}
+    .mySlides {display: block; margin-left: auto; margin-right: auto; width: 30vw;height:20vw;}
     .home_mid {margin-left:25%; margin-right:24%;}
     .middle_bar {font-family: "Open Sans"; height: 480px; top: 190px; background-color:#d4d4d4; position: fixed; left:0; width:100%;}
 </style>

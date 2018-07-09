@@ -30,9 +30,8 @@
                 
                 echo "<br><br><br>";
                 echo
-                    "Index No : $id <br>
-                    Name : $name <br>
-                    <table style='margin-left:50px;'>
+                    "<br>
+                    <table style='margin-left:380px;'>
                         <caption id='cpt1'>My Modules </caption>
                         <tr>
                             <th>Module ID</th>

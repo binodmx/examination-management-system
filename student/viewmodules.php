@@ -32,9 +32,8 @@
                 
                 echo "<br><br><br>";
                 echo
-                    "Index No : $id <br>
-                    Name : $name <br>
-                    <table style='margin-left:50px;'>
+                    "<br>
+                    <table style='margin-left:350px;'>
                         <caption id='cpt1'>Registered Modules for Semester ".$semester."  </caption>
                         <tr>
                             <th>Module ID</th>

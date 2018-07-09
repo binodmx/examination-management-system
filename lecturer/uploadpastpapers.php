@@ -92,22 +92,6 @@
             ?>
             <p><label>Department :</label><input name="department" value="<?php echo $department; ?>" disabled><br> </p>
         
-          <p><label>Semester:</label>
-              <select  name="semester">
-                <option value = "1">1</option>
-                <option value = "2">2</option>
-                <option value = "3">3</option>
-                <option value = "4">4</option>
-                <option value = "5">5</option>
-                <option value = "6">6</option>
-                <option value = "7">7</option>
-                <option value = "8">8</option>
-              </select><br></p>
-
-       
-      
-            <label>Year:</label><input type='number' name='year' maxlength=4 max="<?php echo date("Y") ?>" required><br>
-
             <label>Module ID:</label>
             <select name="moduleCode" required>
                 <?php
@@ -121,6 +105,14 @@
                     }
                 ?>
             </select><br>
+
+    
+
+       
+      
+            <label>Year:</label><input type='number' name='year' maxlength=4 max="<?php echo date("Y") ?>" required><br>
+
+
 
             <label>File Path:</label><input type="file" name="file" required><br><br>
             <input type="submit" name="submit" value="Upload Past Papers" > 
