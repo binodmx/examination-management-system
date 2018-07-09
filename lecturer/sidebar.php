@@ -4,7 +4,7 @@
     <a href='uploadresults.php'>Upload Results</a>
     <a href='viewmodules.php'>View My Modules</a>
     <a href='#'>Check Summary</a>
-    <a href='#'>Student Queries</a>
+    <a href='#'>Recorrection Requests</a>
     <a href='editprofile.php'>Settings</a>
     <a href='profile.php?status=signout'>Sign Out</a>
 </div>

@@ -7,7 +7,7 @@
     <a href='#'>Apply Recorrection</a>
     <a href='#'>Apply Repeat Exams</a>
     <a href='applyconvocation.php'>Apply Convocation</a>
-    <a hfre='#'>Inform Administration</a>
+    <a href='contactAdmin.php'>Inform Administration</a>
     <a href='editprofile.php'>Settings</a>
     <a href='profile.php?status=signout'>Sign Out</a>
 </div>
