@@ -29,7 +29,11 @@ class Student extends User{
         return $this->results;
     }
     public function getModules($semester){
-        return $this->modules[$semester];
+        if (array_key_exists($semester, $this->modules)){
+            return $this->modules[$semester];
+        } else {
+            return 0;
+        }
     }
     public function isRegistered($semester){
         return $this->registration[$semester];
