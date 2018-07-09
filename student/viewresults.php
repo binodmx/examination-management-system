@@ -58,10 +58,10 @@
         $name = $student->getName();
         $results=$student->getResults();
 
-        echo "<br><br><br>";
+        echo "<br>";
         echo
-            "Index No : $id <br>
-            Name : $name <br>
+            "<p style='margin-left:50px;'>Index No : $id </p>
+            <p style='margin-left:50px;'>Name : $name </p><br>
             <table style='margin-left:50px;'>
                 <caption id='cpt1'>Results Sheet</caption>
                 <tr>
@@ -77,9 +77,13 @@
                 $qry = $conn->query($sql);
                 $row = $qry->fetch_assoc();
                 $module = unserialize($row['val']);
-
+                $semester = $module->getSemester();
+                $modulename = $module->getName();
+                $modulecredits = $module->getCredits();
+                $modulemarks = $results[$moduleid];
                 echo
                     "<tr>
+                        <td>$semester</td>
                         <td>$moduleid</td>
                         <td>$modulename</td>
                         <td>$modulecredits</td>
@@ -88,11 +92,7 @@
             }
 
             echo "</table>";
-        } else {
-            echo "Results not available for this semester!";
-        }
-    }
-    $conn->close(); 
+        $conn->close(); 
     ?>
 </div>
 </body>
