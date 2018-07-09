@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php 
+  include "../classes/student.php";
+  session_start()
+;?>
 <!DOCTYPE html>
 <html>
     <head>

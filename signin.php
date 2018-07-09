@@ -11,8 +11,9 @@
     include_once "header.php";
     include_once "classes/student.php";
 ?>
-<!signup procedure>
+<!signin procedure>
 <?php
+if(isset($_SESSION['user'])){echo "<script type='text/javascript'>alert('Current user will be signed out!');</script>";}
 if(isset($_POST['usn']) && isset($_POST['pwd'])){   // check whether username and password is set
     if(strlen($_POST['usn'])!=7 || strlen($_POST['pwd'])==0){   // chech whether username is valid and password is not null
         $errors=true;
@@ -35,16 +36,19 @@ if(isset($_POST['usn']) && isset($_POST['pwd'])){   // check whether username an
             if(md5($_POST['pwd']) == $password){  // check whether password is matching
                 switch($_POST['profile']){
                     case 'student':
+                        if (isset($_SESSION['user'])){unset($_SESSION['user']);}
                         $_SESSION['user'] = unserialize($row["val"]);
                         $_SESSION['profile'] = 'student';
                         header("Location:student/profile.php?msg=signinsuccessful");                              
                         break;
                     case 'lecturer':
+                        if (isset($_SESSION['user'])){unset($_SESSION['user']);}
                         $_SESSION['user'] = unserialize($row["val"]);
                         $_SESSION['profile']='lecturer';
                         header("Location:lecturer/profile.php?msg=signinsuccessful"); 
                         break;
                     case 'admin':
+                        if (isset($_SESSION['user'])){unset($_SESSION['user']);}
                         $_SESSION['user'] = unserialize($row["val"]);
                         $_SESSION['profile']='admin';
                         header("Location:admin/profile.php?msg=signinsuccessful");

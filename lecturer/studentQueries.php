@@ -8,10 +8,9 @@ session_start();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Absense Details</title>
 </head>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../plugin/tinymce/tinymce.min.js"></script>
@@ -20,14 +19,15 @@ session_start();
 <?php
 include_once 'header.php';
 include_once 'sidebar.php';
+include_once '../footer.php';
 ?>
-    <div class="s_quries middlediv">
+    <div class="middlediv">
         <?php
         include_once '../dbconnect.php';
         $lecturer=$_SESSION['user'];
         $modules=$lecturer->getModules();
         $sqlArray = join(',', $modules) ;
-        $sql="SELECT * FROM  absensemessages WHERE module IN('$sqlArray')  ";
+        $sql="SELECT * FROM  absensedetails WHERE module IN('$sqlArray')  ";
         $result=mysqli_query($conn,$sql);
         $resultcheck=mysqli_num_rows($result);
         $messagList=array();
@@ -37,13 +37,12 @@ include_once 'sidebar.php';
             }
 
         }
+        echo "<br><br><br><textarea class='tinymce' style='height:200px'>";
         foreach ($messagList as $row){
-            echo "<div><textarea class='tinymce'>";
-            echo unserialize($row['student'])->getID();
+            echo $row['id'];
             echo $row['message'];
-            echo "</textarea>";
-            echo "</div>";
         }
+        echo "</textarea>";
 
         ?>
     </div>

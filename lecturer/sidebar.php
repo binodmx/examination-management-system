@@ -3,6 +3,7 @@
     <a href='uploadpastpapers.php'>Upload Past Papers</a>
     <a href='uploadresults.php'>Upload Results</a>
     <a href='viewmodules.php'>View My Modules</a>
+    <a href='studentQueries.php'>View Absense Details</a>
     <a href='#'>Check Summary</a>
     <a href='#'>Recorrection Requests</a>
     <a href='editprofile.php'>Settings</a>
