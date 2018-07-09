@@ -1,6 +1,6 @@
 <?php 
     include_once "../classes/student.php";
-    include_once "../classes/result.php";
+    include_once "../classes/module.php";
     session_start();
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
             box-sizing: border-box;
         }
         input, select, textarea {
-            width: 5%;
+            width: 20%;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -54,6 +54,7 @@
             <form action='viewresults.php' method='POST'>
                 <label>Semester :</label>
                 <select name='semester' onchange="this.form.submit()">
+                    <?php if(!isset($_POST['semester'])){echo "<option value='null' >--Select semester--</option>";}?>
                     <option value="1" <?php if($semester=="1"){echo "selected";}?>>1</option>
                     <option value="2" <?php if($semester=="2"){echo "selected";}?>>2</option>
                     <option value="3" <?php if($semester=="3"){echo "selected";}?>>3</option>
