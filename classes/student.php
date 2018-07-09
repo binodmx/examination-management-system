@@ -1,7 +1,6 @@
 <?php
 require_once "user.php";
 require_once "paper.php";
-require_once "result.php";
 class Student extends User{
     // property declaration
     private $batch;
@@ -23,8 +22,11 @@ class Student extends User{
     public function getSemester(){
         return $this->semester;
     }
-    public function getResults($semester){
-        return $this->results[$semester];
+    public function getResult($module){
+        return $this->results[$module];
+    }
+    public function getResults(){
+        return $this->results;
     }
     public function getModules($semester){
         return $this->modules[$semester];
@@ -38,8 +40,8 @@ class Student extends User{
     public function setSemester($semester){
         $this->semester = $semester;
     }
-    public function addResult(){
-        $this->results = new Result();
+    public function addResults($id, $marks){
+        $this->results[$id] = $marks;
     }
     public function register($semester, $modules){
         $this->registration[$semester] = TRUE;

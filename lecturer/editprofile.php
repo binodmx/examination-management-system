@@ -73,7 +73,6 @@
                     header("Location:editprofile.php?msg=updatenotsuccessful");
                 }
                 
-                if($conn->query($updatesql)===TRUE){header("Location:profile.php?msg=updatesuccessful");}
             }else{  // get data
                 echo 
                     "<div class='middlediv'>

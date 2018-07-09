@@ -49,62 +49,70 @@
     <div class="middlediv">
 
 <?php
-
+    if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
     $student = $_SESSION['user'];
-    $id = $student->getId(); 
-    $name = $student->getName();
-    $email = $student->getEmail(); 
-    $mobile = $student->getMobile(); 
 
-    $sql = "SELECT id FROM convocationrequests WHERE id='".$id."'"; 
-    $qry = $conn->query($sql);
-    if($qry->num_rows>0){
-        echo "You have already applied for convocatoin!";
+    $semester =$student->getSemester();
+    if ($semester!=8) {
+        echo "You can not apply for convocation this year!";
     } else {
+        $id = $student->getId(); 
+        $name = $student->getName();
+        $email = $student->getEmail(); 
+        $mobile = $student->getMobile(); 
 
-    if ($student->getFaculty()=='en'){
-        $faculty = 'Engineering';
-    }
-    switch ($student->getDepartment()){
-        case 'bmd':
-            $department = 'Bio Medical Engineering';
-            break;
-        case 'cse':
-            $department = 'Computer Science and Engineering';
-            break;
-        case 'civ':
-            $department = 'Civil Engineering';
-            break;
-        case 'che':
-            $department = 'Chemical and Process Engineering';
-            break;
-        case 'ele':
-            $department = 'Electrical Engineering';
-            break;
-        case 'ent':
-            $department = 'Electronic and Telecommunication Engineering';
-            break;
-        case 'mec':
-            $department = 'Mechanical Engineering';
-            break;
-        case 'mat':
-            $department = 'Material Sciences Engineering';
-            break;
-    }
+        $sql = "SELECT id FROM convocationrequests WHERE id='".$id."'"; 
+        $qry = $conn->query($sql);
+        if($qry->num_rows>0){
+            echo "You have already applied for convocatoin!";
+        } else {
+
+        if ($student->getFaculty()=='en'){
+            $faculty = 'Engineering';
+        }
+        switch ($student->getDepartment()){
+            case 'bmd':
+                $department = 'Bio Medical Engineering';
+                break;
+            case 'cse':
+                $department = 'Computer Science and Engineering';
+                break;
+            case 'civ':
+                $department = 'Civil Engineering';
+                break;
+            case 'che':
+                $department = 'Chemical and Process Engineering';
+                break;
+            case 'ele':
+                $department = 'Electrical Engineering';
+                break;
+            case 'ent':
+                $department = 'Electronic and Telecommunication Engineering';
+                break;
+            case 'mec':
+                $department = 'Mechanical Engineering';
+                break;
+            case 'mat':
+                $department = 'Material Sciences Engineering';
+                break;
+        }
      
 
 ?>
-    <br><br><br>
-    <form action="recordconvocation.php" method='POST'>
-        <label>Index no: </label><input type="text" name="id" value="<?php echo($id) ?>" required disabled><br>
-        <label>Name on Certificate: </label><input type="text" name="name" value="<?php echo($name)  ?>" required><br>
-        <label>Email: </label><input type="email" name="email" value="<?php echo($email) ?>" required><br>
-        <label>Mobile: </label><input type="tel" name="tel" value="<?php echo($mobile) ?>" required maxlength="10"><br>
-        <label>Faculty: </label><input type="text" name="faculty" value="<?php echo($faculty) ?>" required disabled><br>
-        <label>Department: </label><input type="text" name="department" value="<?php echo($department) ?>"  required disabled><br><br>
-        <input type="submit" name='submit' value='Apply'>
-    </form>
-<?php } ?>
+        <br><br><br>
+        <form action="recordconvocation.php" method='POST'>
+            <label>Index no: </label><input type="text" name="id" value="<?php echo($id) ?>" required disabled><br>
+            <label>Name on Certificate: </label><input type="text" name="name" value="<?php echo($name)  ?>" required><br>
+            <label>Email: </label><input type="email" name="email" value="<?php echo($email) ?>" required><br>
+            <label>Mobile: </label><input type="tel" name="tel" value="<?php echo($mobile) ?>" required maxlength="10"><br>
+            <label>Faculty: </label><input type="text" name="faculty" value="<?php echo($faculty) ?>" required disabled><br>
+            <label>Department: </label><input type="text" name="department" value="<?php echo($department) ?>"  required disabled><br><br>
+            <input type="submit" name='submit' value='Apply'>
+        </form>
+<?php 
+        }
+    } 
+?>
 </div>
 </body>
 </html>

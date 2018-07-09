@@ -1,7 +1,6 @@
 <?php 
     include_once "../classes/lecturer.php";
     include_once "../classes/student.php";
-    include_once "../classes/result.php";
     include_once "../classes/module.php";
     session_start();
 ?>
@@ -25,16 +24,6 @@
             box-sizing: border-box;
         }
         input[type=submit] {
-            background-color: #123456;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-            box-sizing: border-box;
-        }
-        input[type=submit] {
                 background-color: #123456;
                 color: white;
                 padding: 12px 20px;
@@ -48,33 +37,34 @@
             input[type=submit]:hover {
                 opacity: 0.8;
             }
-             button{
-                background-color: #123456;
-                color: white;
-                padding: 12px 20px;
-                width: 230px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size:16px;
-                box-sizing: border-box;
-             }
-             button:hover{
-                opacity: 0.8;
-             }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
     <body>
         <?php
+        
             if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
             include_once "header.php";
             include_once "sidebar.php";
             include_once "../footer.php";
             include_once "../dbconnect.php";
-            
-            function goNext($qry){
 
+            if(isset($_POST['submit'])){
+                $sid = $_POST['id'];
+                $mid = $_POST['moduleid'];
+                $mrk = $_POST['marks'];
+                $sql = "SELECT * FROM students WHERE id='$sid'";
+                $qry = $conn->query($sql);
+                $row = $qry->fetch_assoc();
+                $stu = unserialize($row['val']);
+                $stu->addResults($mid, $mrk);
+                $val = serialize($stu);
+                $sql = "UPDATE students SET val='$val' WHERE id='$sid'";
+                if($conn->query($sql)===TRUE){
+                    echo "<script type='text/javascript'>alert('Upload results successful!');</script>";
+                } else {
+                    echo "<script type='text/javascript'>alert('Upload results not successful!');</script>";
+                }
             }
         ?>
 
@@ -111,31 +101,36 @@
             ?>
             <label>Department :</label><input name="department" value="<?php echo $department; ?>" disabled><br>
             <label>Module ID:</label>
-            <select name="moduleid" required>
+            <select name="moduleid" required onchange ="this.form.submit();">
                 <?php
                     $modules = $lecturer->getModules();
                     if(count($modules)>0){
+                        if(!isset($_POST['moduleid'])){echo "<option value='null'>--Select module--</option>";}
                         foreach($modules as $moduleid){
-                            echo "<option value='".$moduleid."'>".$moduleid."</option>";
+                            if(isset($_POST['moduleid']) && $_POST['moduleid'] == $moduleid){$sel = "selected";}else{$sel="";}
+                            echo "<option value='".$moduleid."' ".$sel.">".$moduleid."</option>";
                         }
+
                     } else {
                         echo "<option value='opt'>Not available</option>";
                     }
                 ?>
             </select><br>
             <label>Batch:</label>
-            <select name="batch" onchange="this.form.submit()">
+            <select name="batch" onchange ="this.form.submit()">
                 <?php
-                    if(!isset($_POST['batch'])){echo "<option value='null'>--Select batch--</option>";}
-                    for ($y = date("Y"); $y > (date("Y")-4) ; $y--){
-                        if(isset($_POST['batch']) && $_POST['batch']==$y){$selected = "selected";}else{$selected="";}
-                        echo "<option value='".$y."'".$selected.">".$y."</option>";
+                    if(isset($_POST['moduleid']) && $_POST['moduleid'] != "opt"){
+                        if(!isset($_POST['batch'])){echo "<option value='null'>--Select batch--</option>";}
+                        for ($y = date("Y"); $y > (date("Y")-4) ; $y--){
+                            if(isset($_POST['batch']) && $_POST['batch']==$y){$selected = "selected";}else{$selected="";}
+                            echo "<option value='".$y."'".$selected.">".$y."</option>";
+                        }
                     }
                 ?>
             </select><br><br>
         </form>
 <?php
-    if (isset($_POST['moduleid']) && isset($_POST['batch'])){
+    if (isset($_POST['moduleid']) && isset($_POST['batch']) && $_POST['moduleid'] != "opt"){
         $moduleid = $_POST['moduleid'];
         $batch = $_POST['batch'];
         $sql = "SELECT * FROM modules WHERE id='$moduleid'";
@@ -146,36 +141,52 @@
 ?>
 
 <div style="width: 500px;margin-left: 280px;">
-    <form action="signin.php" method="POST" >
+    <form action="uploadresults.php" method="POST" >
         <fieldset>
             <legend align="center"><h2>Enter Results</h2></legend><br>
+            <input name="batch" type="text" value="<?php echo $batch; ?>" hidden>
+            <input name="moduleid" type="text" value="<?php echo $moduleid; ?>" hidden>
 
+            <label style="padding: 10px;">Student ID:</label>
+            <select name="id" style="width: 75%;margin-right: 20px">
  <?php            
         $sql = "SELECT * FROM students";
+        $value = "";
         $qry = $conn->query($sql);
         if($qry->num_rows>0){
-            if($row = $qry->fetch_assoc()){
+            while($row = $qry->fetch_assoc()){
                 $student = unserialize($row['val']);
-                if($semester<=$student->getSemester()){
+                if($semester <= $student->getSemester()){
                     $modules = $student->getModules($semester);
                     if ($batch == $student->getBatch() && in_array($moduleid, $modules)){
                         $studentid = $student->getID();
-?>
-
-            <label style="padding: 10px;">Student ID:</label><input type="text"  name="id" value="<?php echo $studentid; ?>" style="width: 75%;margin-right: 20px" disabled><br><br>
-            <label style="padding: 10px;">Marks:</label><select name="mark"  style="width: 75%;margin-right: 20px">
-                <option value="A+">A+</option>
-
-            </select><br><br>
-
-<?php
+                        if(array_key_exists($moduleid,$student->getResults())){
+                            $value = $student->getResult($moduleid);
+                        }
+                        echo "<option value='".$studentid."'>".$studentid."</option>";
                     }
-                }
+                } 
             }
+        } else {
+            echo "<option value='Not available'></option>";
         }
 ?>
-            <button type="button" id="prevBtn" onclick="nextPrev(-1)" style="margin-left:10px;"><< Previous</button>
-            <button type="button" id="nextBtn" onclick="goNext($qry)">Next >></button><br><br>
+            </select><br><br>
+
+            <label style="padding: 10px;">Marks:</label>
+            <select name="marks" style="width: 75%;margin-right: 20px">
+                <?php if ($value =="A+") {echo "selected";}?>
+                <option value="A+" <?php if ($value =="A+") {echo "selected";}?>>A+</option>
+                <option value="A" <?php if ($value =="A") {echo "selected";}?>>A</option>
+                <option value="A-" <?php if ($value =="A-") {echo "selected";}?>>A-</option>
+                <option value="B+" <?php if ($value =="B+") {echo "selected";}?>>B+</option>
+                <option value="B" <?php if ($value =="B") {echo "selected";}?>>B</option>
+                <option value="B-" <?php if ($value =="B-") {echo "selected";}?>>B-</option>
+                <option value="C+" <?php if ($value =="C+") {echo "selected";}?>>C+</option>
+                <option value="C" <?php if ($value =="C") {echo "selected";}?>>C</option>
+                <option value="C-" <?php if ($value =="C-") {echo "selected";}?>>C-</option>
+            </select><br><br>
+            <input type="submit" name="submit" value="Submit" style="width: 75%;margin-right: 20px"><br><br><br>
         </fieldset>
     </form>
 </div>
@@ -183,20 +194,6 @@
 <?php
     }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
     </body>
 </html>

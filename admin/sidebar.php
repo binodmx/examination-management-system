@@ -4,7 +4,7 @@
     <a href='createmodule.php'>Create Module</a>
     <a href='assignlecturer.php'>Assign Lecturer</a>
     <a href='convocation.php'>Convocation Requests</a>
-    <a href='#'>Approve GPA</a>
+    <a href='selectSemestersToIncrement.php'>Increase Semester</a>
     <a href='#'>Check Summary</a>
     <a href='#'>Student Queries</a>
     <a href='editprofile.php'>Settings</a>

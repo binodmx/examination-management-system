@@ -30,6 +30,32 @@
                     $student = $_SESSION['user'];
                     $semester = $student->getSemester();
                     $department = $student->getDepartment();
+                    switch ($student->getDepartment()){
+            case 'bmd':
+                $department = 'Bio Medical Engineering';
+                break;
+            case 'cse':
+                $department = 'Computer Science and Engineering';
+                break;
+            case 'civ':
+                $department = 'Civil Engineering';
+                break;
+            case 'che':
+                $department = 'Chemical and Process Engineering';
+                break;
+            case 'ele':
+                $department = 'Electrical Engineering';
+                break;
+            case 'ent':
+                $department = 'Electronic and Telecommunication Engineering';
+                break;
+            case 'mec':
+                $department = 'Mechanical Engineering';
+                break;
+            case 'mat':
+                $department = 'Material Sciences Engineering';
+                break;
+        }
                     $registered = $student->isRegistered($semester);
 
                     // If not registered display available modules
