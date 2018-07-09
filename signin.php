@@ -1,114 +1,98 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            Sign In
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            body {font-family: Arial, Helvetica, sans-serif;}
-            /*form {border: 3px solid #f1f1f1;}*/
-            .signin_form{
-                width: 50%;
-                margin-top: 100px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            table{
-                margin: 0 auto;
-            }
-            button {
-                background-color: #4CAF50;
-                display: block;
-                color: white;
-                padding: 5px 5px;
-                border: none;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 20px;
-                margin-bottom: 20px;
-                cursor: pointer;
-                width: 15%;
-                height: 30px;
-            }
-            button:hover {
-                opacity: 0.8;
-            }
-            tr>td{
-                padding: 10px;
-            }
-            label{
-                margin-right: 20px;
-            }
-            .container {
-                padding: 16px;
-                height: 400px;
-            }
-            input{
-                height: 25px;
-                width: 300px;
-            }
-        </style>
-    </head>
-    <body>
-        <?php include_once "header.php";?>
-        <br><br><br>
-        <div class="container">
-            <!signin form>
-                <div class="signin_form">
-                    <form action="signin.php" method="POST">
-                        <table >
-                            <tr >
-                                <td>
-                                    <label>Username</label>
-                                </td>
-                                <td>
-                                    <input id="u" type="text"  name="usn" maxlength="7" placeholder="Enter Username" autofocus value="<?php if(isset($_POST['usn'])){echo $_POST['usn'];}else{echo '';} ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>Password</label>
-                                </td>
-                                <td>
-                                    <input id="p" type="password"  name="pwd" maxlength="1023" placeholder="Enter Password">
-                                </td>
-                            </tr>
-                        </table>
-                        <button type="submit" name="submit"> Sign In</button>
-                    </form>
-                </div>
-        </div>
-            <?php
-                session_start();
-                if(isset($_POST['usn']) && isset($_POST['pwd'])){
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+</head>
+<body>
 
-                    // Validate step 1
-                    if(strlen($_POST['usn'])<7 || strlen($_POST['pwd'])==0){
-                        echo "Invalid username or password.";
-                    }else{
-                        include_once "dbconnect.php";
-
-                        // Get data
-                        $studentsql = "SELECT password FROM students WHERE id='".$_POST['usn']."'";
-                        $studentquery = $conn->query($studentsql);
-
-                        // Validate step 2
-                        if($studentqueryrow = $studentquery->fetch_assoc()){
-                            $studentpassword = $studentqueryrow["password"];
-                            if($_POST['pwd']==$studentpassword){
-                                $_SESSION['studentid']=$_POST['usn'];
-                                header("Location:student/profile.php");
-                            }else{
-                                echo "Invalid password";
-                            }
-                        }else{
-                            echo "Invalid username.";
-                        }
-                    }
+<?php 
+    include_once "header.php";
+    include_once "classes/student.php";
+?>
+<!signup procedure>
+<?php
+if(isset($_POST['usn']) && isset($_POST['pwd'])){   // check whether username and password is set
+    if(strlen($_POST['usn'])!=7 || strlen($_POST['pwd'])==0){   // chech whether username is valid and password is not null
+        $errors=true;
+    }else{
+        include_once "dbconnect.php";
+        switch($_POST['profile']){
+            case 'student':
+                $sql = "SELECT * FROM students WHERE id='".$_POST['usn']."'";                                
+                break;
+            case 'lecturer':
+                $sql = "SELECT * FROM lecturers WHERE id='".$_POST['usn']."'";
+                break;
+            case 'admin':
+                $sql = "SELECT * FROM admins WHERE id='".$_POST['usn']."'";
+                break;
+        }
+        $qry = $conn->query($sql);
+        if($row = $qry->fetch_assoc()){
+            $password = $row["pwd"];
+            if(md5($_POST['pwd']) == $password){  // check whether password is matching
+                switch($_POST['profile']){
+                    case 'student':
+                        $_SESSION['user'] = unserialize($row["val"]);
+                        $_SESSION['profile'] = 'student';
+                        header("Location:student/profile.php?msg=signinsuccessful");                              
+                        break;
+                    case 'lecturer':
+                        $_SESSION['user'] = unserialize($row["val"]);
+                        $_SESSION['profile']='lecturer';
+                        header("Location:lecturer/profile.php?msg=signinsuccessful"); 
+                        break;
+                    case 'admin':
+                        $_SESSION['user'] = unserialize($row["val"]);
+                        $_SESSION['profile']='admin';
+                        header("Location:admin/profile.php?msg=signinsuccessful");
+                        break;
                 }
-            ?>
-        
-        <?php include_once "footer.php";?>
-    </body>
+                }else{
+                    $errors=true;
+                }
+            }else{
+                $errors=true;
+            }
+        }
+    }
+?> 
+
+<!sign in form>   
+<div class="middle_bar">
+    <div class="login">
+        <form action="signin.php" method="POST" >
+            <fieldset>
+                <legend align="center"><h1>Sign in</h1></legend><br>
+                <?php if (isset($errors) && !empty($errors)) {echo '<p class="error"> Invalid Username / Password</p>';}?>
+                <p>
+                    <label for="">Username :</label>
+                    <input id="u" type="text"  name="usn" maxlength="7" placeholder="Enter Username" autofocus 
+                    value="<?php if(isset($_POST['usn'])){echo $_POST['usn'];}else{echo '';} ?>">
+                </p>
+                <p>
+                    <label for="">Password :</label>
+                    <input id="p" type="password"  name="pwd" maxlength="1023" placeholder="Enter Password">
+                </p>
+                <p>
+                    <label>I am a/an :</label>
+                    <select name="profile">
+                        <option value="student" selected>Student</option>
+                        <option value="lecturer">Lecturer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </p>
+                <p>
+                    <button type="submit" name="submit">Sign In</button><br>
+                </p>
+            </fieldset>
+        </form>
+    </div> 
+</div>
+
+<?php include "footer.php";?>
+
+</body>
 </html>

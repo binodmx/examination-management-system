@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,6 +41,7 @@
             <?php include_once "dbconnect.php"?>
 
             <?php
+                if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
                 // Identify student
                 $studentid = $_SESSION['studentid'];
                 $studentsql = "SELECT semester, department FROM students WHERE id='$studentid'";

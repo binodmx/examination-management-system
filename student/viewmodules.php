@@ -1,74 +1,67 @@
+<?php 
+    include_once "../classes/student.php";
+    include_once "../classes/module.php";
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <title>
-            EMS - UoM
-        </title>
-    </head>
-    <body>
+<head>
+    <title>Registered Modules</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+</head>
+<body>
+    <?php 
+        include_once "header.php";
+        include_once "sidebar.php"; 
+        include_once "../footer.php";       
+    ?>
+    <div class="middlediv">
         <?php 
-            include_once "header.php";
-            include_once "sidebar.php";        
-        ?>
-        <div class="middlediv">
-            <?php include_once "../dbconnect.php"?>
-            <?php
-                session_start();
+            if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability 
+            include_once ("../dbconnect.php");
 
-                // Identify student
-                $studentid = $_SESSION['studentid'];
-                $studentsql = "SELECT name FROM students WHERE id='$studentid'";
-                $studentquery = $conn->query($studentsql);
-                $studentqueryrow = $studentquery->fetch_assoc();
-                $studentname = $studentqueryrow["name"];
+            // Identify student
+            $student = $_SESSION['user'];
+            $semester = $student->getSemester();
+            $registered = $student->isRegistered($semester);
 
-                // Get registered modules
-                $resultsql = "SELECT id FROM stu_".$studentid."_results";
-                $resultquery = $conn->query($resultsql);
-
-                echo 
-
-                    "Index No : $studentid <br>
-                    Name : $studentname
-                    <table>
-                        <caption>Registered Modules</caption>
-                        <div>
-                            <tr>
-                                <th>Semester</th>
-                                <th>Module ID</th>
-                                <th>Module Name</th>
-                                <th>Credits</th>
-                            </tr>
-                        </div>";
-
-                if($resultquery->num_rows>0){
-                    while($resultrow = $resultquery->fetch_assoc()){
-                        $moduleid=$resultrow["id"];
-                        $modulesql = "SELECT name, credits, semester FROM modules WHERE id='$moduleid'";
-                        $modulequery = $conn->query($modulesql);
-                        $modulerow = $modulequery->fetch_assoc();
-                        $modulename = $modulerow["name"];
-                        $modulecredits = $modulerow["credits"];
-                        $modulesemester = $modulerow["semester"];
-
+            if ($registered) {
+                $id=$student->getId(); 
+                $name = $student->getName();
+                $modules=$student->getModules($semester); 
+                
+                echo "<br><br><br>";
+                echo
+                    "<br>
+                    <table style='margin-left:350px;'>
+                        <caption id='cpt1'>Registered Modules for Semester ".$semester."  </caption>
+                        <tr>
+                            <th>Module ID</th>
+                            <th>Module Name</th>
+                            <th>Credits</th>
+                        </tr>";
+                    
+                    foreach ($modules as $moduleid) {
+                        $sql = "SELECT * FROM modules WHERE id='$moduleid'";
+                        $qry = $conn->query($sql);
+                        $row = $qry->fetch_assoc();
+                        $module = unserialize($row['val']);
+                        $modulename = $module->getName();
+                        $modulecredits = $module->getCredits();
+                        $modulesemester = $module->getSemester();
                         echo
-
                             "<tr>
-                                <td>$modulesemester</td>
                                 <td>$moduleid</td>
                                 <td>$modulename</td>
                                 <td>$modulecredits</td>
                             </tr>";
                     }
-                }else{
-                    echo "Not available";
-                }
-                $conn->close(); 
                 echo "</table>";
-            ?>
-        </div>
-
-        <?php include_once "footer.php"; ?>
-    </body>
+            } else {
+                echo "You have not registered for this semester!";
+            }
+        $conn->close(); 
+        ?>
+    </div>
+</body>
 </html>

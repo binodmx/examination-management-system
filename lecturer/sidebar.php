@@ -1,13 +1,10 @@
-<?php
-    echo
-        "<div class='sidenav'>
-            <a href='profile.php'>My profile</a>
-            <a href='#'>Upload Past Papers</a>
-            <a href='#'>Upload Exam Papers</a>
-            <a href='#'>Upload Results</a>
-            <a href='#'>Check Summary</a>
-            <a href='#'>Student queries</a>
-            <a href='#'>Settings</a>
-            <a href='profile.php?status=signout'>Sign out</a>
-        </div>"
-?>
+<div class='sidenav'>
+    <a href='profile.php'>My profile</a>
+    <a href='uploadpastpapers.php'>Upload Past Papers</a>
+    <a href='uploadresults.php'>Upload Results</a>
+    <a href='viewmodules.php'>View My Modules</a>
+    <a href='#'>Check Summary</a>
+    <a href='#'>Student Queries</a>
+    <a href='editprofile.php'>Settings</a>
+    <a href='profile.php?status=signout'>Sign Out</a>
+</div>
