@@ -121,7 +121,7 @@
                 <?php
                     if(isset($_POST['moduleid']) && $_POST['moduleid'] != "opt"){
                         if(!isset($_POST['batch'])){echo "<option value='null'>--Select batch--</option>";}
-                        for ($y = date("Y"); $y > (date("Y")-4) ; $y--){
+                        for ($y = date("Y"); $y > (date("Y")-5) ; $y--){
                             if(isset($_POST['batch']) && $_POST['batch']==$y){$selected = "selected";}else{$selected="";}
                             echo "<option value='".$y."'".$selected.">".$y."</option>";
                         }
@@ -185,6 +185,7 @@
                 <option value="C+" <?php if ($value =="C+") {echo "selected";}?>>C+</option>
                 <option value="C" <?php if ($value =="C") {echo "selected";}?>>C</option>
                 <option value="C-" <?php if ($value =="C-") {echo "selected";}?>>C-</option>
+                <option value="iwe" <?php if ($value =="iwe") {echo "selected";}?>>I-we</option>
             </select><br><br>
             <input type="submit" name="submit" value="Submit" style="width: 75%;margin-right: 20px"><br><br><br>
         </fieldset>

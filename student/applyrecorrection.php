@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php 
+include_once "../classes/student.php";
+include_once "../classes/module.php";
+session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,84 +9,111 @@
             Results
         </title>
         <link rel="stylesheet" type="text/css" href="../css/styles.css">
+        <style>
+        form{
+            padding-top: 50px;
+        }
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        input, select, textarea {
+            width: 75%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+                background-color: #123456;
+                width: 100%;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size:16px;
+                box-sizing: border-box;
+            }
+            input[type=submit]:hover {
+                opacity: 0.8;
+            }
+    </style>
     </head>
     <body>
         <?php 
             include_once "header.php";
             include_once "sidebar.php";
+            include_once "../footer.php";
+            include_once ("../dbconnect.php");
         ?>
         <div class="middlediv">
-            <!select semester>
             <?php 
-                session_start();
-                if(isset($_REQUEST['sem'])){
-                    $semester=$_REQUEST['sem'];
-                }else{
-                    $semester="";
-                }
-            ;?>
-            <form action="viewresults.php" method="GET">
-                Semester :
-                <select name="sem">
-                    <option value="1" <?php if($semester=="1"){echo "selected";};?>>1</option>
-                    <option value="2" <?php if($semester=="2"){echo "selected";};?>>2</option>
-                    <option value="3" <?php if($semester=="3"){echo "selected";};?>>3</option>
-                    <option value="4" <?php if($semester=="4"){echo "selected";};?>>4</option>
-                    <option value="5" <?php if($semester=="5"){echo "selected";};?>>5</option>
-                    <option value="6" <?php if($semester=="6"){echo "selected";};?>>6</option>
-                    <option value="7" <?php if($semester=="7"){echo "selected";};?>>7</option>
-                    <option value="8" <?php if($semester=="8"){echo "selected";};?>>8</option>
-                </select> 
-                <input type="text" name="studentid" value=<?php echo $_SESSION['studentid'];?> hidden>
-                <input type="submit" value="submit">
-            </form>
+            if(isset($_GET['msg']) && $_GET['msg'] == 'alreadyappliedrecorrection'){echo "<script type='text/javascript'>alert('Already applied recorrection!');</script>";}
+            if(isset($_GET['msg']) && $_GET['msg'] == 'applyconvocationsuccessful'){echo "<script type='text/javascript'>alert('Apply recorrection successful!');</script>";}
+            if(isset($_GET['msg']) && $_GET['msg'] == 'applyconvocationnotsuccessful'){echo "<script type='text/javascript'>alert('Apply recorrection not successful!');</script>";}
+             ?>
+            <?php  
+            if(!isset($_SESSION['user'])){header("Location:../index.php");}
+             // Identify student
+
+            $student = $_SESSION['user'];
+            $id = $student->getid();
+            $semester = ($student->getSemester())-1;
             
-            <?php include_once "dbconnect.php"?>
-
-            <?php
-                if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
-                // Identify student
-                $studentid = $_SESSION['studentid'];
-                $studentsql = "SELECT semester, department FROM students WHERE id='$studentid'";
-                $studentquery = $conn->query($studentsql);
-                $studentqueryrow = $studentquery->fetch_assoc();
-                $department = $studentqueryrow["department"];
-                
-                $resultsql = "SELECT * FROM stu_".$studentid."_results WHERE semester='$semester'";
-                $resultquery = $conn->query($resultsql);
-
-                //Display results in table
-                if($resultquery->num_rows>0){
-                    echo "<table>
-                            <caption id='cpt1'>Results of semester $semester </caption>
-                            <div>
-                            <tr>
-                                <th>Module ID</th>
-                                <th>Module Name</th>
-                                <th>Grade</th>
-                            </tr></div>";
-                    
-                        while($resultrow=$resultquery->fetch_assoc()){
-                            $moduleid=$resultrow["id"];
-                            $modulesql = "SELECT name FROM modules WHERE id='$moduleid'";
-                            $modulequery = $conn->query($modulesql);
-                            $modulerow = $modulequery->fetch_assoc();
-                            $modulename = $modulerow["name"];
-                            $modulegrade = $resultrow["grade"];
-                            echo "<tr>";
-                            echo "<td>".$moduleid."</td>";
-                            echo "<td>".$modulename."</td>";
-                            echo "<td>".$modulegrade."</td>";
-                            echo "</tr>";
+             ?>
+            <form action="applyrecorrection.php" method="POST" >
+            <label>Module ID:</label>
+            <select name="moduleid" required onchange ="this.form.submit();">
+                <?php
+                    $modules = $student->getModules($semester);
+                    if(count($modules)>0){
+                        if(!isset($_POST['moduleid'])){echo "<option value='null'>--Select module--</option>";}
+                        foreach($modules as $moduleid){
+                            if(isset($_POST['moduleid']) && $_POST['moduleid'] == $moduleid){$sel = "selected";}else{$sel="";}
+                            echo "<option value='".$moduleid."' ".$sel.">".$moduleid."</option>";
                         }
-                }else{
-                    if($semester!=""){echo "Not available";};
-                }
-                echo "</table>";
-                $conn->close();
-            ?>
-        </div>
 
-        <?php include_once "footer.php";?>
+                    } else {
+                        echo "<option value='opt'>Not available</option>";
+                    }
+                ?>
+            </select><br>
+             </form>
+            <?php
+            if (isset($_POST['moduleid']) && $_POST['moduleid'] != "opt"){
+                $moduleid = $_POST['moduleid'];
+                $sql = "SELECT * FROM modules WHERE id='$moduleid'";
+                $qry = $conn->query($sql);
+                $row = $qry->fetch_assoc();
+                $module = unserialize($row['val']);
+                $modulename = $module->getName();
+                $result=$student->getResult($moduleid);
+                if ($result=="0") {
+                    $result="Not available";
+                    echo "Results are not available for this module. So You cannot apply recorrection!";
+                }
+                else{
+
+                    ?>
+
+         
+        <form action='recordrecorrection.php' method='POST' >
+        <fieldset>
+            <legend align='center'><h2>Apply Recorrection</h2></legend><br><br><br>
+            <label style="margin-left: 10px"><?php echo $modulename ?></label>
+             <input name='result' type='text' value="<?php echo $result?>" disabled><br><br><br>
+             <input name='moduleid' type='text' value="<?php echo $moduleid; ?>" hidden>
+            <input type='submit' name='submit' value='Apply' style='width: 93%;margin-left: 10px'><br><br><br>
+              </fieldset>
+    </form>;<?php 
+}
+}
+
+?>
+
+        </div>
     </body>
 </html>

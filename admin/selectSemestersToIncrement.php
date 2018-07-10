@@ -54,11 +54,12 @@
 		<form action="incrementSemester.php" method="POST">
 		<p>
             <label>Batch:</label>
-   	        <select name="Batch">
-            <option value= <?php (date("Y")-1)  ?> selected><?php echo (date("Y"))  ?></option>
-            <option value=<?php (date("Y")- 2)  ?>><?php echo (date("Y")-1)  ?></option>
-            <option value=<?php (date("Y")- 3)  ?>><?php echo (date("Y")-2)  ?></option>
-            <option value=<?php (date("Y")- 4)  ?>><?php echo (date("Y")-3)  ?></option>
+   	        <select name="batch">
+            <option value=<?php echo (date('Y'))     ?> selected><?php echo (date("Y"))  ?></option>
+            <option value=<?php echo (date('Y')-1)  ?>><?php echo (date("Y")-1)  ?></option>
+            <option value=<?php echo (date('Y')-2)  ?>><?php echo (date("Y")-2)  ?></option>
+            <option value=<?php echo (date('Y')-3)  ?>><?php echo (date("Y")-3)  ?></option>
+            <option value=<?php echo (date('Y')-4)  ?>><?php echo (date("Y")-4)  ?></option>
             </select><br><br>
         </p>
 		<input type="submit" name='submit' value='Increment Semester'>

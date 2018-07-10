@@ -110,7 +110,7 @@
 
        
       
-            <label>Year:</label><input type='number' name='year' maxlength=4 max="<?php echo date("Y") ?>" required><br>
+            <label>Year:</label><input type='number' name='year' min='2000' maxlength=4 max="<?php echo date("Y") ?>" required><br>
 
 
 

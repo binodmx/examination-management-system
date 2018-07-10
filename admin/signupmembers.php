@@ -8,6 +8,7 @@
 <body>
 <?php 
     if(isset($_GET['msg']) && $_GET['msg'] == 'signupsuccessful'){echo "<script type='text/javascript'>alert('Add member successful!');</script>";}
+    if(isset($_GET['msg']) && $_GET['msg'] == 'useralreadyexists'){echo "<script type='text/javascript'>alert('Member exists!');</script>";}
     include_once "header.php";
     include_once "sidebar.php";
     include_once "../footer.php";
@@ -35,7 +36,7 @@
                     $qry = $conn->query($sql);
                     if($qry->num_rows>0){   // check whether already a user or not
                         $_POST = array();
-                        header("Location:signupmembers.php?err=useralreadyexists");
+                        header("Location:signupmembers.php?msg=useralreadyexists");
                     }else{
                         $student = new Student($_POST['id'], $_POST['fn']);
                         if (isset($_POST['ni'])){$student->setNIC($_POST['ni']);};
@@ -101,7 +102,6 @@
                     <option value="ent" <?php if(isset($_POST['dp']) && $_POST['dp']=='ent'){echo "selected";}?>>Electronic and Telecommunication Engineering</option>
                     <option value="mec" <?php if(isset($_POST['dp']) && $_POST['dp']=='mec'){echo "selected";}?>>Mechanical Engineering</option>
                     <option value="mat" <?php if(isset($_POST['dp']) && $_POST['dp']=='mat'){echo "selected";}?>>Material Sciences Engineering</option>
-                    <option value="" hidden <?php if(isset($_POST['fa']) && $_POST['fa']!='en'){echo "selected";}?>></option>
                 </select></p>
             </div>
             <div class="column">

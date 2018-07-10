@@ -42,6 +42,7 @@
         <?php
             if(isset($_GET['msg']) && $_GET['msg'] == 'updatesuccessful'){echo "<script type='text/javascript'>alert('Create module successful!');</script>";}
             if(isset($_GET['msg']) && $_GET['msg'] == 'updatenotsuccessful'){echo "<script type='text/javascript'>alert('Create module not successful!');</script>";}
+            if(isset($_GET['msg']) && $_GET['msg'] == 'moduleexists'){echo "<script type='text/javascript'>alert('Module exists!');</script>";}
             if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
 
             include_once "header.php";
@@ -50,23 +51,30 @@
             include_once "../dbconnect.php";
 
             if(isset($_POST['status'])){ // Update data
-                $id = $_POST['id'];
-                $module = new Module($id);
-                $module->setName($_POST['name']);
-                $module->setSemester($_POST['semester']);
-                $module->setCredits($_POST['credits']);
-                $module->setDepartment($_POST['department']);
-                $module->setCompulsory($_POST['compulsory']);
-                $_POST = array();
-                $val = serialize($module);
-                $updatesql = "INSERT INTO modules (id, val) VALUES ('$id', '$val')";
-                
-                if($conn->query($updatesql)===TRUE){
-                    header("Location:createmodule.php?msg=updatesuccessful");
-                } else {
-                    $_POST=array();
-                    header("Location:createmodule.php?msg=updatenotsuccessful");
-                }
+                $sql = "SELECT id FROM modules WHERE id='".$_POST['id']."'";
+                    $qry = $conn->query($sql);
+                    if($qry->num_rows>0){   // check whether already a user or not
+                        $_POST = array();
+                        header("Location:createmodule.php?msg=moduleexists");
+                    } else {
+                        $id = $_POST['id'];
+                        $module = new Module($id);
+                        $module->setName($_POST['name']);
+                        $module->setSemester($_POST['semester']);
+                        $module->setCredits($_POST['credits']);
+                        $module->setDepartment($_POST['department']);
+                        $module->setCompulsory($_POST['compulsory']);
+                        $_POST = array();
+                        $val = serialize($module);
+                        $updatesql = "INSERT INTO modules (id, val) VALUES ('$id', '$val')";
+                        
+                        if($conn->query($updatesql)===TRUE){
+                            header("Location:createmodule.php?msg=updatesuccessful");
+                        } else {
+                            $_POST=array();
+                            header("Location:createmodule.php?msg=updatenotsuccessful");
+                        }
+                    }
 
             } else {  // get data
                 echo 

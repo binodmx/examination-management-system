@@ -1,90 +1,148 @@
-<?php session_start();?>
+<?php
+include"../classes/user.php";
+include "../classes/student.php";
+session_start();?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>
-            Results
+        <title>Apply Repeat Exams
         </title>
         <link rel="stylesheet" type="text/css" href="../css/styles.css">
     </head>
+    <style>
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        input, select, textarea {
+            width: 85%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            float: right;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            background-color: #123456;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            font-size:16px;
+            box-sizing: border-box;
+        }
+        input[type=submit]:hover {
+            opacity: 0.8;
+        }
+    </style>
     <body>
+
         <?php 
             include_once "header.php";
             include_once "sidebar.php";
+            include_once "../footer.php";
+            include_once "../dbconnect.php";
         ?>
 
         <div class="middlediv">
-            <!select semester>
-            <?php 
-                session_start();
-                if(isset($_REQUEST['sem'])){
-                    $semester=$_REQUEST['sem'];
-                }else{
-                    $semester="";
-                }
-            ;?>
-            <form action="viewresults.php" method="GET">
-                Semester :
-                <select name="sem">
-                    <option value="1" <?php if($semester=="1"){echo "selected";};?>>1</option>
-                    <option value="2" <?php if($semester=="2"){echo "selected";};?>>2</option>
-                    <option value="3" <?php if($semester=="3"){echo "selected";};?>>3</option>
-                    <option value="4" <?php if($semester=="4"){echo "selected";};?>>4</option>
-                    <option value="5" <?php if($semester=="5"){echo "selected";};?>>5</option>
-                    <option value="6" <?php if($semester=="6"){echo "selected";};?>>6</option>
-                    <option value="7" <?php if($semester=="7"){echo "selected";};?>>7</option>
-                    <option value="8" <?php if($semester=="8"){echo "selected";};?>>8</option>
-                </select> 
-                <input type="text" name="studentid" value=<?php echo $_SESSION['studentid'];?> hidden>
-                <input type="submit" value="submit">
-            </form>
-            
-            <?php include_once "dbconnect.php"?>
-
+            <h2>Application for repeat exams </h2><br>
             <?php
-                if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
-                // Identify student
-                $studentid = $_SESSION['studentid'];
-                $studentsql = "SELECT semester, department FROM students WHERE id='$studentid'";
-                $studentquery = $conn->query($studentsql);
-                $studentqueryrow = $studentquery->fetch_assoc();
-                $department = $studentqueryrow["department"];
-                
-                $resultsql = "SELECT * FROM stu_".$studentid."_results WHERE semester='$semester'";
-                $resultquery = $conn->query($resultsql);
-
-                //Display results in table
-                if($resultquery->num_rows>0){
-                    echo "<table>
-                            <caption id='cpt1'>Results of semester $semester </caption>
-                            <div>
-                            <tr>
-                                <th>Module ID</th>
-                                <th>Module Name</th>
-                                <th>Grade</th>
-                            </tr></div>";
-                    
-                        while($resultrow=$resultquery->fetch_assoc()){
-                            $moduleid=$resultrow["id"];
-                            $modulesql = "SELECT name FROM modules WHERE id='$moduleid'";
-                            $modulequery = $conn->query($modulesql);
-                            $modulerow = $modulequery->fetch_assoc();
-                            $modulename = $modulerow["name"];
-                            $modulegrade = $resultrow["grade"];
-                            echo "<tr>";
-                            echo "<td>".$moduleid."</td>";
-                            echo "<td>".$modulename."</td>";
-                            echo "<td>".$modulegrade."</td>";
-                            echo "</tr>";
-                        }
-                }else{
-                    if($semester!=""){echo "Not available";};
+            if(!isset($_SESSION['user'])){header("Location:../index.php");} // Session availability
+            $student = $_SESSION['user'];
+            $modules=array();
+            $repeatmodules=array();
+            $semester =$student->getSemester();
+            $modulelist=$student->getResults();
+            
+            foreach ($modulelist as $key=>$value){
+                if($value=='iwe'){
+                    array_push($repeatmodules,$key);
                 }
-                echo "</table>";
-                $conn->close();
-            ?>
-        </div>
+            }
 
-        <?php include_once "footer.php";?>
+
+            $id = $student->getId();
+            $name = $student->getName();
+            $email = $student->getEmail();
+            $mobile = $student->getMobile();
+
+            if ($student->getFaculty()=='en'){
+                $faculty = 'Engineering';
+            }
+            switch ($student->getDepartment()){
+                case 'bmd':
+                    $department = 'Bio Medical Engineering';
+                    break;
+                case 'cse':
+                    $department = 'Computer Science and Engineering';
+                    break;
+                case 'civ':
+                    $department = 'Civil Engineering';
+                    break;
+                case 'che':
+                    $department = 'Chemical and Process Engineering';
+                    break;
+                case 'ele':
+                    $department = 'Electrical Engineering';
+                    break;
+                case 'ent':
+                    $department = 'Electronic and Telecommunication Engineering';
+                    break;
+                case 'mec':
+                    $department = 'Mechanical Engineering';
+                    break;
+                case 'mat':
+                    $department = 'Material Sciences Engineering';
+                    break;
+            }
+
+
+            ?>
+            <form action="applyrepeatexams.php" method='POST'>
+                <label>Index no: </label><input type="text" name="id" value="<?php echo($id) ?>" required disabled><br>
+                <label>Name: </label><input type="text" name="name" value="<?php echo($name)  ?>" disabled><br>
+                <label>Faculty: </label><input type="text" name="faculty" value="<?php echo($faculty) ?>" required disabled><br>
+                <label>Module Code:</label><select name="module" id="module">
+                    <?php
+                        if(sizeof($repeatmodules)>0){
+                            foreach ($repeatmodules as $m){
+                                echo "<option value='";
+                                echo $m;
+                                echo "'>";
+                                echo $m;
+                                echo '</option>';
+                            }
+                        }else{
+                            echo '<option value="Norepeatedmodules">No repeated modules</option>';
+                        }
+                    ?>
+                </select><br>
+                <label>Department: </label><input type="text" name="department" value="<?php echo($department) ?>"  required disabled><br><br>
+                <input type="submit" name='submit' value='Apply'>
+
+            </form>
+            <?php
+                include_once "../dbconnect.php";
+                if(isset($_POST['module'])){
+                    $m=$_POST['module'];
+                    if($m!='Norepeatedmodules'){
+                        $student = $_SESSION['user'];
+                        $s=serialize($student);
+                        $id = $_POST['id'];
+                        $sql="INSERT INTO repeatexamrequests (id, module, val) VALUES ('$id', '$m','$s')";
+                        $result=mysqli_query($conn,$sql);
+                        header("Location:profile.php?msg=applyrepeatexamssuccessfull");
+                    }
+
+                }
+            ?>
+
+
+
+        </div>
     </body>
 </html>
